@@ -82,7 +82,7 @@ const OnboardingTimeline = () => {
                     <div className="calendar-card">
                         <div className="calendar-header">
                             <button className="cal-nav-btn"><ChevronLeft size={20} /></button>
-                            <span className="current-month">September 2024</span>
+                            <span className="current-month">September 2026</span>
                             <button className="cal-nav-btn"><ChevronRight size={20} /></button>
                         </div>
 

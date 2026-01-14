@@ -166,9 +166,9 @@ const OnboardingDailyRhythm = () => {
                 <div className="footer-next-group">
                     <div className="next-info">
                         <span className="next-label">NEXT UP</span>
-                        <span className="next-name">Select Study Subjects</span>
+                        <span className="next-name">Strength Assessment</span>
                     </div>
-                    <button className="continue-btn" onClick={() => navigate('/onboarding/subjects')}>
+                    <button className="continue-btn" onClick={() => navigate('/onboarding/pulse')}>
                         Continue <ArrowRight size={20} />
                     </button>
                 </div>

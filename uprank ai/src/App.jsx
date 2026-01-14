@@ -10,6 +10,8 @@ import ExploreExams from './ExploreExams';
 import OnboardingPath from './OnboardingPath';
 import OnboardingTimeline from './OnboardingTimeline';
 import OnboardingDailyRhythm from './OnboardingDailyRhythm';
+import OnboardingPulse from './OnboardingPulse';
+import OnboardingLaunchpad from './OnboardingLaunchpad';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -29,6 +31,8 @@ function App() {
           <Route path="/onboarding/path" element={<OnboardingPath />} />
           <Route path="/onboarding/timeline" element={<OnboardingTimeline />} />
           <Route path="/onboarding/rhythm" element={<OnboardingDailyRhythm />} />
+          <Route path="/onboarding/pulse" element={<OnboardingPulse />} />
+          <Route path="/onboarding/launchpad" element={<OnboardingLaunchpad />} />
         </Routes>
       </div>
     </Router>
