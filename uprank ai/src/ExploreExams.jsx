@@ -4,10 +4,11 @@ import {
     Clock, Users, BarChart2, Eye, BookOpen, Briefcase, Globe, Scale
 } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ExploreExams.css';
 
 const ExploreExams = () => {
+    const navigate = useNavigate();
     // State for filters (simplified for visuals)
     const [filters, setFilters] = useState({
         engineering: true,
@@ -566,7 +567,7 @@ const ExploreExams = () => {
                                 </div>
 
                                 <div className="card-actions">
-                                    <button className="start-btn">Start Prep</button>
+                                    <button className="start-btn" onClick={() => navigate('/onboarding/path')}>Start Prep</button>
                                     <button className="view-btn"><Eye size={18} /></button>
                                 </div>
                             </div>

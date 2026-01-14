@@ -7,6 +7,7 @@ import ForgotPassword from './ForgotPassword';
 import OtpVerification from './OtpVerification';
 import ExamSelection from './ExamSelection';
 import ExploreExams from './ExploreExams';
+import OnboardingPath from './OnboardingPath';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -23,6 +24,7 @@ function App() {
           <Route path="/verify-otp" element={<OtpVerification />} />
           <Route path="/exam-selection" element={<ExamSelection />} />
           <Route path="/explore-exams" element={<ExploreExams />} />
+          <Route path="/onboarding/path" element={<OnboardingPath />} />
         </Routes>
       </div>
     </Router>
