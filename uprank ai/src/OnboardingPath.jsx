@@ -84,9 +84,9 @@ const OnboardingPath = () => {
                 <div className="action-area">
                     <button
                         className="continue-btn"
-                        onClick={() => navigate('/subject-selection')} // Placeholder route
+                        onClick={() => navigate('/onboarding/timeline')}
                     >
-                        Continue to Subject Selection <ArrowRight size={20} />
+                        Continue <ArrowRight size={20} />
                     </button>
                     <p className="disclaimer">You can change your path at any time in settings.</p>
                 </div>
