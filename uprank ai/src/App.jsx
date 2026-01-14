@@ -9,6 +9,7 @@ import ExamSelection from './ExamSelection';
 import ExploreExams from './ExploreExams';
 import OnboardingPath from './OnboardingPath';
 import OnboardingTimeline from './OnboardingTimeline';
+import OnboardingDailyRhythm from './OnboardingDailyRhythm';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/explore-exams" element={<ExploreExams />} />
           <Route path="/onboarding/path" element={<OnboardingPath />} />
           <Route path="/onboarding/timeline" element={<OnboardingTimeline />} />
+          <Route path="/onboarding/rhythm" element={<OnboardingDailyRhythm />} />
         </Routes>
       </div>
     </Router>

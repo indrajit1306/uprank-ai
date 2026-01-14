@@ -125,7 +125,7 @@ const OnboardingTimeline = () => {
                         <button className="back-link" onClick={() => navigate('/onboarding/path')}>
                             <MoveLeft size={16} /> Back
                         </button>
-                        <button className="next-btn">
+                        <button className="next-btn" onClick={() => navigate('/onboarding/rhythm')}>
                             Next: Create Study Plan <ArrowRight size={20} />
                         </button>
                     </div>
