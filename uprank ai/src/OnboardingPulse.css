@@ -459,3 +459,92 @@
         padding: 1rem 1.5rem;
     }
 }
+
+/* Dark Mode Overrides */
+.pulse-container.dark-mode {
+    background-color: #0B0B15;
+    color: white;
+}
+
+.pulse-container.dark-mode .pulse-header {
+    background: #13131f;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pulse-container.dark-mode .brand-text {
+    color: white;
+}
+
+.pulse-container.dark-mode .nav-link {
+    color: #94a3b8;
+}
+
+.pulse-container.dark-mode .nav-link:hover {
+    color: white;
+}
+
+.pulse-container.dark-mode .progress-card,
+.pulse-container.dark-mode .subject-card,
+.pulse-container.dark-mode .ai-insight-card {
+    background: #13131f;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pulse-container.dark-mode .progress-header p,
+.pulse-container.dark-mode .progress-subtext,
+.pulse-container.dark-mode .section-intro p {
+    color: #94a3b8;
+}
+
+.pulse-container.dark-mode .progress-bar-bg {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.pulse-container.dark-mode .category-title {
+    color: white;
+}
+
+.pulse-container.dark-mode .pulse-footer {
+    background: #0B0B15;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: none;
+}
+
+.pulse-container.dark-mode .rating-btn.low {
+    background: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+}
+
+.pulse-container.dark-mode .rating-btn.low.active {
+    background: #ef4444;
+    color: white;
+}
+
+.pulse-container.dark-mode .rating-btn.mid {
+    background: rgba(245, 158, 11, 0.2);
+    color: #fcd34d;
+}
+
+.pulse-container.dark-mode .rating-btn.mid.active {
+    background: #f59e0b;
+    color: white;
+}
+
+.pulse-container.dark-mode .rating-btn.high {
+    background: rgba(16, 185, 129, 0.2);
+    color: #6ee7b7;
+}
+
+.pulse-container.dark-mode .rating-btn.high.active {
+    background: #10b981;
+    color: white;
+}
+
+.pulse-container.dark-mode .stat-row {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.pulse-container.dark-mode .insight-stats h5 {
+    color: white;
+}

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ArrowLeft, Sparkles, Beaker, Calculator, BookOpen, MessageSquare, MoreHorizontal } from 'lucide-react';
+import { ArrowLeft, Sparkles, Beaker, Calculator, BookOpen, Moon, Sun } from 'lucide-react';
 import { UpRankLogo } from './Navbar'; // Reusing UpRank branding despite image showing "Knowledge Pulse" text
 import './OnboardingPulse.css';
 
 const OnboardingPulse = () => {
     const navigate = useNavigate();
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
     // State for subject ratings
     const [ratings, setRatings] = useState({
@@ -45,7 +48,7 @@ const OnboardingPulse = () => {
     );
 
     return (
-        <div className="pulse-container">
+        <div className={`pulse-container ${isDarkMode ? 'dark-mode' : ''}`}>
             {/* Header */}
             <header className="pulse-header">
                 <div className="pulse-brand">
@@ -55,6 +58,11 @@ const OnboardingPulse = () => {
                     <span className="brand-text">UpRank AI</span>
                 </div>
                 <div className="header-actions">
+                    <button onClick={toggleTheme} className="theme-toggle-btn" style={{
+                        background: 'none', border: 'none', cursor: 'pointer', color: isDarkMode ? 'white' : '#4b5563', display: 'flex', alignItems: 'center'
+                    }}>
+                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
                     <a href="#" className="nav-link">Onboarding</a>
                     <a href="#" className="nav-link">Support</a>
                     <div className="user-avatar-sm"></div>
