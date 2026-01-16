@@ -231,6 +231,40 @@
     border: 1px solid var(--border-color);
     background-size: cover;
     background-position: center;
+    transition: transform 0.3s ease;
+}
+
+/* Gradients - Dark Mode Default */
+.gradient-slate {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+}
+
+.gradient-indigo {
+    background: linear-gradient(135deg, #312e81 0%, #1e1b4b 100%);
+}
+
+.gradient-emerald {
+    background: linear-gradient(135deg, #064e3b 0%, #022c22 100%);
+}
+
+/* Gradients - Light Mode Overrides */
+[data-theme="light"] .gradient-slate {
+    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    border-color: #cbd5e1;
+}
+
+[data-theme="light"] .gradient-indigo {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    border-color: #a5b4fc;
+}
+
+[data-theme="light"] .gradient-emerald {
+    background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+    border-color: #6ee7b7;
+}
+
+.rec-card:hover {
+    transform: translateY(-5px);
 }
 
 .card-tag {
@@ -267,6 +301,7 @@
     font-size: 1.5rem;
     font-weight: 700;
     margin-bottom: 0.25rem;
+    color: white;
 }
 
 .card-info p {
@@ -281,6 +316,19 @@
     font-size: 0.8rem;
     color: rgba(255, 255, 255, 0.7);
     margin-bottom: 1rem;
+}
+
+/* Text adjustments for light mode cards */
+[data-theme="light"] .card-info h4 {
+    color: var(--text-main);
+}
+
+[data-theme="light"] .card-info p {
+    color: var(--text-muted);
+}
+
+[data-theme="light"] .card-stats {
+    color: var(--text-muted);
 }
 
 .start-prep-btn {

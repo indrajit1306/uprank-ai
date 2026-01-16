@@ -34,7 +34,7 @@ const ExamSelection = () => {
             duration: "6 Months",
             tag: "Popular",
             tagColor: "orange",
-            color: "linear-gradient(135deg, #1e293b 0%, #0f172a 100%)",
+            gradientClass: "gradient-slate",
             image: "/jee-bg.png" // Placeholder or generated later
         },
         {
@@ -44,7 +44,7 @@ const ExamSelection = () => {
             duration: "1 Year",
             tag: "AI Recommended",
             tagColor: "purple",
-            color: "linear-gradient(135deg, #312e81 0%, #1e1b4b 100%)",
+            gradientClass: "gradient-indigo",
             image: "/neet-bg.png"
         },
         {
@@ -53,7 +53,7 @@ const ExamSelection = () => {
             enrolled: "8k+",
             duration: "3 Months",
             tag: null,
-            color: "linear-gradient(135deg, #064e3b 0%, #022c22 100%)",
+            gradientClass: "gradient-emerald",
             image: "/gmat-bg.png"
         }
     ];
@@ -134,7 +134,7 @@ const ExamSelection = () => {
                     </div>
                     <div className="recommended-grid">
                         {recommendedExams.map((exam, idx) => (
-                            <div className="rec-card" key={idx} style={{ background: exam.color }}>
+                            <div className={`rec-card ${exam.gradientClass}`} key={idx}>
                                 {exam.tag && (
                                     <div className={`card-tag ${exam.tagColor}`}>
                                         {exam.tag === 'Popular' ? '🔥 Popular' : exam.tag}
