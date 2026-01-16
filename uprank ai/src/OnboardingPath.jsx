@@ -1,11 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { BarChart, Brain, Zap, ArrowRight, Sparkles } from 'lucide-react';
+import { BarChart, Brain, Zap, ArrowRight, Sparkles, Sun, Moon } from 'lucide-react';
 import './OnboardingPath.css';
 
 const OnboardingPath = () => {
     const navigate = useNavigate();
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
     const [selectedPath, setSelectedPath] = useState('mastery'); // Default selected as per image
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     const paths = [
         {
@@ -49,7 +59,12 @@ const OnboardingPath = () => {
                     </div>
                 </div>
 
-                <button className="skip-btn">Skip for now</button>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                    <button onClick={toggleTheme} className="icon-btn theme-btn" style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)' }}>
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
+                    <button className="skip-btn">Skip for now</button>
+                </div>
             </header>
 
             {/* Main Content */}

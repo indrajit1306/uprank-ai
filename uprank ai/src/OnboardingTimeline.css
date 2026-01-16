@@ -2,8 +2,7 @@
     display: flex;
     min-height: 100vh;
     font-family: 'Inter', sans-serif;
-    background: white;
-    /* Right side default */
+    background: var(--background);
 }
 
 /* Sidebar (Left Panel) */
@@ -142,9 +141,10 @@
 .timeline-main {
     width: 65%;
     padding: 2rem 3rem;
-    /* Reduced from 3rem 4rem */
     display: flex;
     flex-direction: column;
+    color: var(--text-main);
+    background: var(--background);
 }
 
 .top-progress-bar {
@@ -158,26 +158,25 @@
     margin-bottom: 0.5rem;
     font-size: 0.7rem;
     font-weight: 700;
-    color: #6D28D9;
+    color: var(--primary);
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
 
 .progress-info .percent-text {
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .progress-track {
     width: 100%;
     height: 4px;
-    /* Reduced */
-    background: #f1f5f9;
+    background: var(--border-color);
     border-radius: 99px;
 }
 
 .progress-fill {
     height: 100%;
-    background: #6D28D9;
+    background: var(--primary);
     border-radius: 99px;
 }
 
@@ -195,23 +194,21 @@
 
 .header-section h2 {
     font-size: 1.8rem;
-    /* Reduced from 2.25rem */
     font-weight: 800;
-    color: #0f172a;
+    color: var(--text-main);
     margin-bottom: 0.5rem;
 }
 
 .header-section p {
-    color: #64748b;
+    color: var(--text-muted);
     font-size: 0.95rem;
-    /* Reduced */
     line-height: 1.5;
 }
 
 /* Calendar Card */
 .calendar-card {
-    background: white;
-    border: 1px solid #e2e8f0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 2rem;
     margin-bottom: 2rem;
@@ -228,21 +225,21 @@
 .current-month {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #0f172a;
+    color: var(--text-main);
 }
 
 .cal-nav-btn {
     background: transparent;
     border: none;
     cursor: pointer;
-    color: #64748b;
+    color: var(--text-muted);
     padding: 0.5rem;
     border-radius: 50%;
     transition: background 0.2s;
 }
 
 .cal-nav-btn:hover {
-    background: #f1f5f9;
+    background: var(--card-bg);
 }
 
 .calendar-grid {
@@ -255,7 +252,7 @@
 .calendar-day-label {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #94a3b8;
+    color: var(--text-muted);
     margin-bottom: 1rem;
 }
 
@@ -265,7 +262,7 @@
     align-items: center;
     justify-content: center;
     font-size: 0.9rem;
-    color: #0f172a;
+    color: var(--text-main);
     font-weight: 500;
     border-radius: 8px;
     cursor: pointer;
@@ -273,15 +270,16 @@
 }
 
 .calendar-date:hover:not(.prev-month) {
-    background: #f1f5f9;
+    background: var(--background);
 }
 
 .calendar-date.prev-month {
-    color: #cbd5e1;
+    color: var(--text-muted);
+    opacity: 0.5;
 }
 
 .calendar-date.selected {
-    background: #6D28D9;
+    background: var(--primary);
     color: white;
     font-weight: 700;
     box-shadow: 0 4px 12px rgba(109, 40, 217, 0.3);
@@ -289,8 +287,8 @@
 
 /* AI Insight */
 .ai-insight-box {
-    background: #f5f3ff;
-    border: 1px solid #ddd6fe;
+    background: var(--background);
+    border: 1px solid var(--primary);
     border-radius: 12px;
     padding: 1.5rem;
     display: flex;
@@ -301,7 +299,7 @@
 .insight-icon {
     width: 32px;
     height: 32px;
-    background: #6D28D9;
+    background: var(--primary);
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -311,14 +309,14 @@
 }
 
 .insight-text h4 {
-    color: #6D28D9;
+    color: var(--primary);
     font-size: 0.95rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
 }
 
 .insight-text p {
-    color: #334155;
+    color: var(--text-main);
     font-size: 0.9rem;
     line-height: 1.5;
 }
@@ -333,7 +331,7 @@
 .back-link {
     background: none;
     border: none;
-    color: #64748b;
+    color: var(--text-muted);
     font-weight: 600;
     cursor: pointer;
     display: flex;
@@ -342,11 +340,11 @@
 }
 
 .back-link:hover {
-    color: #0f172a;
+    color: var(--text-main);
 }
 
 .next-btn {
-    background: #6D28D9;
+    background: var(--primary);
     color: white;
     border: none;
     padding: 1rem 2rem;
@@ -361,7 +359,6 @@
 }
 
 .next-btn:hover {
-    background: #5b21b6;
     transform: translateY(-2px);
 }
 
@@ -399,63 +396,12 @@
     }
 }
 
-/* Dark Mode Overrides */
-.timeline-container.dark-mode {
-    background: #0B0B15;
+/* Light Mode Overrides for AI Box */
+[data-theme="light"] .ai-insight-box {
+    background: #f5f3ff;
+    border-color: #ddd6fe;
 }
 
-.timeline-container.dark-mode .timeline-main {
-    background: #0B0B15;
-    color: white;
-}
-
-.timeline-container.dark-mode .header-section h2 {
-    color: white;
-}
-
-.timeline-container.dark-mode .header-section p {
-    color: #94a3b8;
-}
-
-.timeline-container.dark-mode .calendar-card {
-    background: #13131f;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.timeline-container.dark-mode .current-month,
-.timeline-container.dark-mode .calendar-date {
-    color: white;
-}
-
-.timeline-container.dark-mode .calendar-date:hover:not(.prev-month) {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.timeline-container.dark-mode .calendar-date.prev-month {
-    color: #4b5563;
-}
-
-.timeline-container.dark-mode .cal-nav-btn {
-    color: #94a3b8;
-}
-
-.timeline-container.dark-mode .cal-nav-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.timeline-container.dark-mode .ai-insight-box {
-    background: #1e1b4b;
-    border: 1px solid #4c1d95;
-}
-
-.timeline-container.dark-mode .insight-text p {
-    color: #cbd5e1;
-}
-
-.timeline-container.dark-mode .back-link {
-    color: #94a3b8;
-}
-
-.timeline-container.dark-mode .back-link:hover {
-    color: white;
+[data-theme="light"] .calendar-card {
+    background: white;
 }

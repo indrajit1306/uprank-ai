@@ -8,9 +8,16 @@ const OnboardingDailyRhythm = () => {
     const navigate = useNavigate();
     const [studyHours, setStudyHours] = useState(6.0);
     const [displayHours, setDisplayHours] = useState(0);
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
-    const toggleTheme = () => setIsDarkMode(!isDarkMode);
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     // Animation for the center number
     useEffect(() => {
@@ -52,7 +59,7 @@ const OnboardingDailyRhythm = () => {
     const dashOffset = arcLength * (1 - percentage);
 
     return (
-        <div className={`rhythm-container ${isDarkMode ? 'dark-mode' : ''}`}>
+        <div className="rhythm-container">
             {/* Header */}
             <header className="rhythm-header">
                 <div className="header-brand">
@@ -61,9 +68,9 @@ const OnboardingDailyRhythm = () => {
                 </div>
                 <div className="header-progress">
                     <button onClick={toggleTheme} className="theme-toggle-btn" style={{
-                        background: 'none', border: 'none', cursor: 'pointer', color: isDarkMode ? 'white' : '#4b5563', display: 'flex', alignItems: 'center', marginRight: '1rem'
+                        background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', marginRight: '1rem'
                     }}>
-                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
                     <div className="step-info">
                         <span className="step-label">ONBOARDING</span>

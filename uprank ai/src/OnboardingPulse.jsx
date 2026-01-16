@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ArrowLeft, Sparkles, Beaker, Calculator, BookOpen, Moon, Sun } from 'lucide-react';
 import { UpRankLogo } from './Navbar'; // Reusing UpRank branding despite image showing "Knowledge Pulse" text
@@ -6,9 +6,16 @@ import './OnboardingPulse.css';
 
 const OnboardingPulse = () => {
     const navigate = useNavigate();
-    const [isDarkMode, setIsDarkMode] = useState(true);
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
-    const toggleTheme = () => setIsDarkMode(!isDarkMode);
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     // State for subject ratings
     const [ratings, setRatings] = useState({
@@ -48,7 +55,7 @@ const OnboardingPulse = () => {
     );
 
     return (
-        <div className={`pulse-container ${isDarkMode ? 'dark-mode' : ''}`}>
+        <div className="pulse-container">
             {/* Header */}
             <header className="pulse-header">
                 <div className="pulse-brand">
@@ -59,9 +66,9 @@ const OnboardingPulse = () => {
                 </div>
                 <div className="header-actions">
                     <button onClick={toggleTheme} className="theme-toggle-btn" style={{
-                        background: 'none', border: 'none', cursor: 'pointer', color: isDarkMode ? 'white' : '#4b5563', display: 'flex', alignItems: 'center'
+                        background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center'
                     }}>
-                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
                     <a href="#" className="nav-link">Onboarding</a>
                     <a href="#" className="nav-link">Support</a>

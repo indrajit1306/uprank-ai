@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowRight, Sparkles, MoveLeft, Sun, Moon } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
@@ -7,9 +7,16 @@ import './OnboardingTimeline.css';
 const OnboardingTimeline = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(15);
-    const [isDarkMode, setIsDarkMode] = useState(false);
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
 
-    const toggleTheme = () => setIsDarkMode(!isDarkMode);
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     // Mock calendar days for September 2024
     const days = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -22,7 +29,7 @@ const OnboardingTimeline = () => {
     };
 
     return (
-        <div className={`timeline-container ${isDarkMode ? 'dark-mode' : ''}`}>
+        <div className="timeline-container">
             {/* Left Sidebar */}
             <aside className="timeline-sidebar">
                 <div className="sidebar-logo">
@@ -68,9 +75,9 @@ const OnboardingTimeline = () => {
             <main className="timeline-main">
                 <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
                     <button onClick={toggleTheme} className="theme-toggle-btn" style={{
-                        background: 'none', border: 'none', cursor: 'pointer', color: isDarkMode ? 'white' : '#4b5563', display: 'flex', alignItems: 'center'
+                        background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', display: 'flex', alignItems: 'center'
                     }}>
-                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
                     </button>
                 </div>
                 <div className="top-progress-bar">

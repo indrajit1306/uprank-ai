@@ -1,8 +1,7 @@
 .rhythm-container {
     min-height: 100vh;
-    background: #f3f4f6;
-    /* Light Mode Default */
-    color: #111827;
+    background: var(--background);
+    color: var(--text-main);
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
@@ -16,9 +15,8 @@
     align-items: center;
     padding: 1.5rem 3rem;
     z-index: 10;
-    background: white;
-    /* Light header */
-    border-bottom: 1px solid #e5e7eb;
+    background: transparent;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .header-brand {
@@ -30,7 +28,7 @@
 .brand-name {
     font-weight: 700;
     font-size: 1.1rem;
-    color: #111827;
+    color: var(--text-main);
 }
 
 .header-progress {
@@ -47,7 +45,7 @@
 
 .step-label {
     font-size: 0.6rem;
-    color: #6b7280;
+    color: var(--text-muted);
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -61,7 +59,8 @@
 .step-bar {
     width: 100px;
     height: 6px;
-    background: #1e293b;
+    background: var(--card-bg);
+    /* Was #1e293b usually dark */
     border-radius: 99px;
     overflow: hidden;
 }
@@ -76,8 +75,7 @@
 .user-avatar {
     width: 36px;
     height: 36px;
-    background: #e2e8f0;
-    /* Placeholder color */
+    background: var(--card-bg);
     border-radius: 50%;
 }
 
@@ -108,7 +106,7 @@
 }
 
 .text-section p {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 1.1rem;
     max-width: 500px;
     margin: 0 auto;
@@ -173,7 +171,8 @@
 
 .gauge-track-bg {
     fill: none;
-    stroke: #1e1b4b;
+    stroke: var(--card-bg);
+    /* Use card-bg for track? Or border? */
     stroke-width: 24;
     stroke-linecap: round;
 }
@@ -225,12 +224,12 @@
     font-size: 5rem;
     font-weight: 700;
     line-height: 1;
-    color: white;
+    color: var(--text-main);
 }
 
 .info-label {
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-weight: 600;
     letter-spacing: 0.1em;
     margin-top: 0.5rem;
@@ -251,7 +250,7 @@
 .label-side {
     font-size: 0.75rem;
     font-weight: 700;
-    color: #64748b;
+    color: var(--text-muted);
     letter-spacing: 0.05em;
     margin-top: 6px;
 }
@@ -263,7 +262,7 @@
 
 .status-title {
     display: block;
-    color: #8b5cf6;
+    color: var(--primary);
     font-size: 1.2rem;
     font-weight: 800;
     text-transform: uppercase;
@@ -272,7 +271,7 @@
 }
 
 .status-desc {
-    color: #94a3b8;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
@@ -284,8 +283,8 @@
 }
 
 .slider-shell {
-    background: #151520;
-    border: 1px solid #282830;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     padding: 1rem 1.75rem;
     border-radius: 99px;
     display: flex;
@@ -295,7 +294,7 @@
 }
 
 .slider-icon {
-    color: #94a3b8;
+    color: var(--text-muted);
 }
 
 .rhythm-slider {
@@ -334,7 +333,7 @@
 }
 
 .slider-value {
-    color: white;
+    color: var(--text-main);
     font-weight: 600;
     font-size: 0.9rem;
     min-width: 60px;
@@ -347,15 +346,15 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background: #0B0B15;
+    border-top: 1px solid var(--border-color);
+    background: var(--background);
     z-index: 20;
 }
 
 .back-btn {
     background: none;
     border: none;
-    color: #94a3b8;
+    color: var(--text-muted);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -365,7 +364,7 @@
 }
 
 .back-btn:hover {
-    color: white;
+    color: var(--text-main);
 }
 
 .footer-next-group {
@@ -383,17 +382,17 @@
 .next-label {
     font-size: 0.65rem;
     font-weight: 700;
-    color: #64748b;
+    color: var(--text-muted);
 }
 
 .next-name {
     font-size: 0.9rem;
     font-weight: 700;
-    color: white;
+    color: var(--text-main);
 }
 
 .continue-btn {
-    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
+    background: var(--gradient-brand);
     color: white;
     border: none;
     padding: 0.85rem 2rem;
@@ -429,104 +428,15 @@
     }
 }
 
-/* Dark Mode Overrides */
-.rhythm-container.dark-mode {
-    background: #0B0B15;
-    color: white;
+/* Light Mode Gauge Track Background */
+[data-theme="light"] .gauge-track-bg {
+    stroke: #e2e8f0;
 }
 
-.rhythm-container.dark-mode .rhythm-header {
-    background: transparent;
-    border-bottom: none;
-}
-
-.rhythm-container.dark-mode .brand-name {
-    color: white;
-}
-
-.rhythm-container.dark-mode .step-label {
-    color: #94a3b8;
-}
-
-.rhythm-container.dark-mode .step-bar {
-    background: #1e293b;
-}
-
-.rhythm-container.dark-mode .text-section p {
-    color: #94a3b8;
-}
-
-.rhythm-container.dark-mode .info-number {
-    color: white;
-}
-
-.rhythm-container.dark-mode .info-label {
-    color: #94a3b8;
-}
-
-.rhythm-container.dark-mode .label-side {
-    color: #64748b;
-}
-
-.rhythm-container.dark-mode .status-desc {
-    color: #94a3b8;
-}
-
-.rhythm-container.dark-mode .slider-shell {
-    background: #151520;
-    border: 1px solid #282830;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-}
-
-.rhythm-container.dark-mode .rhythm-slider {
-    background: #282834;
-}
-
-.rhythm-container.dark-mode .rhythm-footer {
-    background: #0B0B15;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-}
-
-.rhythm-container.dark-mode .back-btn {
-    color: #94a3b8;
-}
-
-.rhythm-container.dark-mode .back-btn:hover {
-    color: white;
-}
-
-.rhythm-container.dark-mode .next-name {
-    color: white;
-}
-
-/* Light Mode Specifics (since base is now light) */
-.info-number {
-    color: #111827;
-}
-
-.slider-shell {
+[data-theme="light"] .slider-shell {
     background: white;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
-.rhythm-slider {
-    background: #e5e7eb;
-}
-
-.rhythm-footer {
-    background: white;
-    border-top: 1px solid #e5e7eb;
-}
-
-.back-btn {
-    color: #6b7280;
-}
-
-.back-btn:hover {
-    color: #111827;
-}
-
-.next-name {
-    color: #111827;
+[data-theme="light"] .rhythm-slider {
+    background: #e2e8f0;
 }

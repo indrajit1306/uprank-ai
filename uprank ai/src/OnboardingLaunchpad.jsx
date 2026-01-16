@@ -1,13 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CheckCircle2, Rocket, BarChart2, Calendar, Clock, BookOpen, PenTool, LayoutDashboard } from 'lucide-react';
+import { CheckCircle2, Rocket, BarChart2, Calendar, Clock, BookOpen, PenTool, LayoutDashboard, Sun, Moon } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
 import './OnboardingLaunchpad.css';
 import rocketImage from './assets/rocket_launch.png';
 
 const OnboardingLaunchpad = () => {
     const navigate = useNavigate();
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
     const [checklistActive, setChecklistActive] = useState([false, false, false]);
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     useEffect(() => {
         // Staggered animation for checklist
@@ -30,6 +40,9 @@ const OnboardingLaunchpad = () => {
                     <span className="brand-text">UpRank AI</span>
                 </div>
                 <div className="header-nav">
+                    <button onClick={toggleTheme} className="icon-btn theme-btn" style={{ marginRight: '1rem' }}>
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
                     <a href="#">How it Works</a>
                     <a href="#">Support</a>
                     <button className="sign-out-btn">Sign Out</button>
