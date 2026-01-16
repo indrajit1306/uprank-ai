@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { MoveLeft, ArrowRight, Clock, Coffee, Zap, BookOpen, Lightbulb } from 'lucide-react';
+import { MoveLeft, ArrowRight, Clock, Coffee, Zap, BookOpen, Lightbulb, Sun, Moon } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
 import './OnboardingDailyRhythm.css';
 
@@ -8,6 +8,9 @@ const OnboardingDailyRhythm = () => {
     const navigate = useNavigate();
     const [studyHours, setStudyHours] = useState(6.0);
     const [displayHours, setDisplayHours] = useState(0);
+    const [isDarkMode, setIsDarkMode] = useState(true);
+
+    const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
     // Animation for the center number
     useEffect(() => {
@@ -49,7 +52,7 @@ const OnboardingDailyRhythm = () => {
     const dashOffset = arcLength * (1 - percentage);
 
     return (
-        <div className="rhythm-container">
+        <div className={`rhythm-container ${isDarkMode ? 'dark-mode' : ''}`}>
             {/* Header */}
             <header className="rhythm-header">
                 <div className="header-brand">
@@ -57,6 +60,11 @@ const OnboardingDailyRhythm = () => {
                     <span className="brand-name">UpRank AI</span>
                 </div>
                 <div className="header-progress">
+                    <button onClick={toggleTheme} className="theme-toggle-btn" style={{
+                        background: 'none', border: 'none', cursor: 'pointer', color: isDarkMode ? 'white' : '#4b5563', display: 'flex', alignItems: 'center', marginRight: '1rem'
+                    }}>
+                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
                     <div className="step-info">
                         <span className="step-label">ONBOARDING</span>
                         <span className="step-count">Step 3 of 5</span>

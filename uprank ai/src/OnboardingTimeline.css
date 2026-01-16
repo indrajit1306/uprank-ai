@@ -394,12 +394,68 @@
         margin-bottom: 2rem;
     }
 
-    .time-box {
-        width: 80px;
-        height: 80px;
-    }
-
     .time-val {
         font-size: 2rem;
     }
+}
+
+/* Dark Mode Overrides */
+.timeline-container.dark-mode {
+    background: #0B0B15;
+}
+
+.timeline-container.dark-mode .timeline-main {
+    background: #0B0B15;
+    color: white;
+}
+
+.timeline-container.dark-mode .header-section h2 {
+    color: white;
+}
+
+.timeline-container.dark-mode .header-section p {
+    color: #94a3b8;
+}
+
+.timeline-container.dark-mode .calendar-card {
+    background: #13131f;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeline-container.dark-mode .current-month,
+.timeline-container.dark-mode .calendar-date {
+    color: white;
+}
+
+.timeline-container.dark-mode .calendar-date:hover:not(.prev-month) {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-container.dark-mode .calendar-date.prev-month {
+    color: #4b5563;
+}
+
+.timeline-container.dark-mode .cal-nav-btn {
+    color: #94a3b8;
+}
+
+.timeline-container.dark-mode .cal-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.timeline-container.dark-mode .ai-insight-box {
+    background: #1e1b4b;
+    border: 1px solid #4c1d95;
+}
+
+.timeline-container.dark-mode .insight-text p {
+    color: #cbd5e1;
+}
+
+.timeline-container.dark-mode .back-link {
+    color: #94a3b8;
+}
+
+.timeline-container.dark-mode .back-link:hover {
+    color: white;
 }

@@ -1,7 +1,8 @@
 .rhythm-container {
     min-height: 100vh;
-    background: #0B0B15;
-    color: white;
+    background: #f3f4f6;
+    /* Light Mode Default */
+    color: #111827;
     font-family: 'Inter', sans-serif;
     display: flex;
     flex-direction: column;
@@ -15,6 +16,9 @@
     align-items: center;
     padding: 1.5rem 3rem;
     z-index: 10;
+    background: white;
+    /* Light header */
+    border-bottom: 1px solid #e5e7eb;
 }
 
 .header-brand {
@@ -26,6 +30,7 @@
 .brand-name {
     font-weight: 700;
     font-size: 1.1rem;
+    color: #111827;
 }
 
 .header-progress {
@@ -42,7 +47,7 @@
 
 .step-label {
     font-size: 0.6rem;
-    color: #94a3b8;
+    color: #6b7280;
     font-weight: 700;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -422,4 +427,106 @@
         /* Recalc for smaller width: 300 / 300(viewbox) * 120(radius) = 120px */
         top: -120px;
     }
+}
+
+/* Dark Mode Overrides */
+.rhythm-container.dark-mode {
+    background: #0B0B15;
+    color: white;
+}
+
+.rhythm-container.dark-mode .rhythm-header {
+    background: transparent;
+    border-bottom: none;
+}
+
+.rhythm-container.dark-mode .brand-name {
+    color: white;
+}
+
+.rhythm-container.dark-mode .step-label {
+    color: #94a3b8;
+}
+
+.rhythm-container.dark-mode .step-bar {
+    background: #1e293b;
+}
+
+.rhythm-container.dark-mode .text-section p {
+    color: #94a3b8;
+}
+
+.rhythm-container.dark-mode .info-number {
+    color: white;
+}
+
+.rhythm-container.dark-mode .info-label {
+    color: #94a3b8;
+}
+
+.rhythm-container.dark-mode .label-side {
+    color: #64748b;
+}
+
+.rhythm-container.dark-mode .status-desc {
+    color: #94a3b8;
+}
+
+.rhythm-container.dark-mode .slider-shell {
+    background: #151520;
+    border: 1px solid #282830;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.rhythm-container.dark-mode .rhythm-slider {
+    background: #282834;
+}
+
+.rhythm-container.dark-mode .rhythm-footer {
+    background: #0B0B15;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.rhythm-container.dark-mode .back-btn {
+    color: #94a3b8;
+}
+
+.rhythm-container.dark-mode .back-btn:hover {
+    color: white;
+}
+
+.rhythm-container.dark-mode .next-name {
+    color: white;
+}
+
+/* Light Mode Specifics (since base is now light) */
+.info-number {
+    color: #111827;
+}
+
+.slider-shell {
+    background: white;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+.rhythm-slider {
+    background: #e5e7eb;
+}
+
+.rhythm-footer {
+    background: white;
+    border-top: 1px solid #e5e7eb;
+}
+
+.back-btn {
+    color: #6b7280;
+}
+
+.back-btn:hover {
+    color: #111827;
+}
+
+.next-name {
+    color: #111827;
 }

@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ArrowRight, Sparkles, MoveLeft } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Sparkles, MoveLeft, Sun, Moon } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
 import './OnboardingTimeline.css';
 
 const OnboardingTimeline = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(15);
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+    const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
     // Mock calendar days for September 2024
     const days = Array.from({ length: 30 }, (_, i) => i + 1);
@@ -19,7 +22,7 @@ const OnboardingTimeline = () => {
     };
 
     return (
-        <div className="timeline-container">
+        <div className={`timeline-container ${isDarkMode ? 'dark-mode' : ''}`}>
             {/* Left Sidebar */}
             <aside className="timeline-sidebar">
                 <div className="sidebar-logo">
@@ -63,6 +66,13 @@ const OnboardingTimeline = () => {
 
             {/* Right Content */}
             <main className="timeline-main">
+                <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem' }}>
+                    <button onClick={toggleTheme} className="theme-toggle-btn" style={{
+                        background: 'none', border: 'none', cursor: 'pointer', color: isDarkMode ? 'white' : '#4b5563', display: 'flex', alignItems: 'center'
+                    }}>
+                        {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
+                </div>
                 <div className="top-progress-bar">
                     <div className="progress-info">
                         <span className="step-text">ONBOARDING STEP 2 OF 5</span>
