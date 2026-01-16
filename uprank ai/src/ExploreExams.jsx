@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Search, Bell, User, Filter, ChevronDown, Check,
-    Clock, Users, BarChart2, Eye, BookOpen, Briefcase, Globe, Scale
+    Clock, Users, BarChart2, Eye, BookOpen, Briefcase, Globe, Scale,
+    Sun, Moon
 } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
 import { Link, useNavigate } from 'react-router-dom';
@@ -9,6 +10,8 @@ import './ExploreExams.css';
 
 const ExploreExams = () => {
     const navigate = useNavigate();
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
     // State for filters (simplified for visuals)
     const [filters, setFilters] = useState({
         engineering: true,
@@ -26,6 +29,15 @@ const ExploreExams = () => {
 
     const [visibleCount, setVisibleCount] = useState(6);
 
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
+
     const categories = [
         { name: 'Engineering', count: 12, key: 'engineering' },
         { name: 'Medical', count: 8, key: 'medical' },
@@ -35,6 +47,7 @@ const ExploreExams = () => {
     ];
 
     const allExams = [
+        // ... (All exam data remains same, snippet cut for brevity in tool call, will rely on context)
         {
             title: "JEE Advanced 2024",
             desc: "India's premier engineering entrance test for IIT admissions.",
@@ -45,6 +58,7 @@ const ExploreExams = () => {
             icon: <BookOpen color="#60a5fa" />,
             color: "rgba(96, 165, 250, 0.1)"
         },
+        // ... ...
         {
             title: "NEET UG 2024",
             desc: "Unified medical entrance exam for MBBS and BDS aspirants across top colleges.",
@@ -452,6 +466,9 @@ const ExploreExams = () => {
                     <a href="#">Community</a>
                 </div>
                 <div className="nav-right">
+                    <button onClick={toggleTheme} className="icon-btn theme-btn">
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
                     <button className="icon-btn"><Bell size={20} /></button>
                     <div className="user-profile-pic">
                         <User size={20} />

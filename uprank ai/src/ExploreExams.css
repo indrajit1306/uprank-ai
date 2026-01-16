@@ -1,7 +1,7 @@
 .explore-container {
     min-height: 100vh;
-    background: #0B0B15;
-    color: white;
+    background: var(--background);
+    color: var(--text-main);
     font-family: 'Inter', sans-serif;
 }
 
@@ -13,7 +13,7 @@
 
 .breadcrumbs {
     font-size: 0.9rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     margin-bottom: 2rem;
 }
 
@@ -22,7 +22,7 @@
 }
 
 .breadcrumbs .current {
-    color: white;
+    color: var(--text-main);
     font-weight: 500;
 }
 
@@ -30,10 +30,11 @@
     font-size: 2.5rem;
     font-weight: 800;
     margin-bottom: 0.5rem;
+    color: var(--text-main);
 }
 
 .explore-header p {
-    color: #94a3b8;
+    color: var(--text-muted);
     margin-bottom: 3rem;
     font-size: 1.1rem;
 }
@@ -44,8 +45,8 @@
 }
 
 .large-search-bar {
-    background: #131320;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     padding: 1rem;
     display: flex;
@@ -58,7 +59,7 @@
     width: 100%;
     background: transparent;
     border: none;
-    color: white;
+    color: var(--text-main);
     font-size: 1rem;
 }
 
@@ -72,26 +73,25 @@
     gap: 1rem;
     flex-wrap: wrap;
     font-size: 0.8rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     font-weight: 700;
     letter-spacing: 0.05em;
 }
 
 .tag-btn {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: #cbd5e1;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
     padding: 0.4rem 1rem;
     border-radius: 99px;
-    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .tag-btn:hover {
-    background: #6D28D9;
+    background: var(--primary);
     color: white;
-    border-color: #6D28D9;
+    border-color: var(--primary);
 }
 
 /* Layout */
@@ -110,7 +110,7 @@
 
 .filter-group h3 {
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
     font-weight: 700;
@@ -122,18 +122,18 @@
     gap: 0.75rem;
     margin-bottom: 0.75rem;
     cursor: pointer;
-    color: #cbd5e1;
+    color: var(--text-muted);
     font-size: 0.95rem;
 }
 
 .checkbox-item:hover {
-    color: white;
+    color: var(--text-main);
 }
 
 .custom-checkbox {
     width: 18px;
     height: 18px;
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    border: 2px solid var(--border-color);
     border-radius: 4px;
     display: flex;
     align-items: center;
@@ -142,26 +142,35 @@
 }
 
 .custom-checkbox.checked {
-    background: #6D28D9;
-    border-color: #6D28D9;
+    background: var(--primary);
+    border-color: var(--primary);
 }
 
 .count-badge {
     margin-left: auto;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     padding: 0.1rem 0.5rem;
     border-radius: 4px;
     font-size: 0.75rem;
-    color: #94a3b8;
+    color: var(--text-muted);
 }
 
 /* AI Quiz Card */
 .ai-quiz-card {
-    background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    background: linear-gradient(135deg, rgba(30, 27, 75, 0.8) 0%, rgba(15, 23, 42, 0.8) 100%);
+    border: 1px solid var(--primary);
     padding: 1.5rem;
     border-radius: 16px;
     margin-top: 1rem;
+    color: white;
+}
+
+/* Light mode override for Quiz Card to keep it distinct */
+[data-theme="light"] .ai-quiz-card {
+    background: linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%);
+    border-color: #818cf8;
+    color: var(--text-main);
 }
 
 .sparkles-icon {
@@ -177,14 +186,15 @@
 
 .ai-quiz-card p {
     font-size: 0.85rem;
-    color: #cbd5e1;
+    color: inherit;
     line-height: 1.5;
     margin-bottom: 1.5rem;
+    opacity: 0.8;
 }
 
 .quiz-btn {
     width: 100%;
-    background: #6D28D9;
+    background: var(--primary);
     color: white;
     border: none;
     padding: 0.75rem;
@@ -201,8 +211,8 @@
 }
 
 .exam-detail-card {
-    background: #131320;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
     border-radius: 16px;
     padding: 1.5rem;
     display: flex;
@@ -213,7 +223,7 @@
 }
 
 .exam-detail-card:hover {
-    border-color: #6D28D9;
+    border-color: var(--primary);
     transform: translateY(-2px);
 }
 
@@ -268,11 +278,12 @@
     font-size: 1.25rem;
     font-weight: 700;
     margin-bottom: 0.75rem;
+    color: var(--text-main);
 }
 
 .desc {
     font-size: 0.9rem;
-    color: #94a3b8;
+    color: var(--text-muted);
     line-height: 1.5;
     margin-bottom: 1rem;
 }
@@ -281,7 +292,7 @@
     display: flex;
     gap: 1.25rem;
     margin-bottom: 1.5rem;
-    color: #cbd5e1;
+    color: var(--text-muted);
     font-size: 0.8rem;
     font-weight: 500;
     flex-wrap: wrap;
@@ -302,7 +313,7 @@
 
 .start-btn {
     flex: 1;
-    background: #6D28D9;
+    background: var(--primary);
     color: white;
     border: none;
     padding: 0.75rem;
@@ -313,23 +324,26 @@
 }
 
 .start-btn:hover {
-    background: #5b21b6;
+    background: var(--primary-hover);
 }
 
 .view-btn {
     width: 42px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+    background: transparent;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: all 0.2s;
 }
 
 .view-btn:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
 
 .load-more-container {
@@ -338,9 +352,9 @@
 }
 
 .load-more-btn {
-    background: #1e1b4b;
-    color: white;
-    border: 1px solid #6D28D9;
+    background: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid var(--primary);
     padding: 0.75rem 1.5rem;
     border-radius: 8px;
     font-weight: 600;
