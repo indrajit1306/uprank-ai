@@ -414,8 +414,8 @@
 .view-details-btn {
     width: 100%;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: white;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
     padding: 0.6rem;
     border-radius: 6px;
     font-size: 0.9rem;
@@ -424,8 +424,9 @@
 }
 
 .view-details-btn:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: #64748b;
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
 }
 
 .view-all-card {
@@ -439,27 +440,31 @@
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--background);
+    border: 1px solid var(--border-color);
     display: flex;
     align-items: center;
     justify-content: center;
     margin-bottom: 1rem;
-    color: #94a3b8;
+    color: var(--text-muted);
 }
 
 .view-all-card span {
     font-weight: 600;
-    color: #94a3b8;
+    color: var(--text-muted);
 }
 
 .view-all-card:hover .plus-circle {
-    background: #6D28D9;
+    background: var(--primary);
     color: white;
+    border-color: var(--primary);
 }
 
 .view-all-card:hover span {
-    color: white;
+    color: var(--primary);
 }
+
+/* Light mode specific hover fix for View All text was not needed as we switched to primary color */
 
 .sort-dropdown {
     display: flex;
