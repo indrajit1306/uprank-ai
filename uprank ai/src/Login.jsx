@@ -20,7 +20,7 @@ const Login = () => {
                         </div>
 
                         <div className="neural-card">
-                            <img src="/neural-network.png" alt="AI Neural Network" className="neural-img" />
+                            <div className="neural-bg"></div>
                             <div className="ai-center-text">AI</div>
                             <div className="ai-status">
                                 <Sparkles size={14} color="#a855f7" />

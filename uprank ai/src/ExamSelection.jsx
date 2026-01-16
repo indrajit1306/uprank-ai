@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     Search, Bell, User, BookOpen, Briefcase, Globe, Scale,
-    Monitor, PenTool, ChevronDown, MoreHorizontal, Plus
+    Monitor, PenTool, ChevronDown, MoreHorizontal, Plus, Sun, Moon
 } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
 import { useNavigate } from 'react-router-dom';
@@ -9,7 +9,17 @@ import './ExamSelection.css';
 
 const ExamSelection = () => {
     const [activeCategory, setActiveCategory] = useState('All Exams');
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
     const navigate = useNavigate();
+
+    React.useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
 
     const categories = [
         "All Exams", "Engineering", "Medical", "Management",
@@ -72,6 +82,9 @@ const ExamSelection = () => {
                     <a href="#">Community</a>
                 </div>
                 <div className="nav-right">
+                    <button onClick={toggleTheme} className="icon-btn theme-btn">
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
                     <button className="icon-btn"><Bell size={20} /></button>
                     <div className="user-profile-pic">
                         <User size={20} />
