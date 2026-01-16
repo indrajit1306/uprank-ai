@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { Sun, Moon } from 'lucide-react';
 import './App.css'; // Ensure styling is available
 
 export const UpRankLogo = () => (
@@ -12,27 +13,43 @@ export const UpRankLogo = () => (
     </svg>
 );
 
-const Navbar = () => (
-    <nav className="navbar">
-        <div className="container nav-container">
-            <Link to="/" className="logo-link">
-                <div className="logo">
-                    <UpRankLogo />
-                    <span>UpRank AI</span>
+const Navbar = () => {
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
+
+    const toggleTheme = () => {
+        setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
+
+    return (
+        <nav className="navbar">
+            <div className="container nav-container">
+                <Link to="/" className="logo-link">
+                    <div className="logo">
+                        <UpRankLogo />
+                        <span>UpRank AI</span>
+                    </div>
+                </Link>
+                <div className="nav-links">
+                    <Link to="/#exams">Exams</Link>
+                    <a href="/#features">Features</a>
+                    <a href="/#pricing">Pricing</a>
+                    <a href="/#testimonials">Testimonials</a>
                 </div>
-            </Link>
-            <div className="nav-links">
-                <Link to="/#exams">Exams</Link> {/* Changed to Link for internal nav consistency if needed, or normal anchors */}
-                <a href="/#features">Features</a>
-                <a href="/#pricing">Pricing</a>
-                <a href="/#testimonials">Testimonials</a>
+                <div className="nav-actions">
+                    <button onClick={toggleTheme} className="theme-toggle" aria-label="Toggle theme">
+                        {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+                    </button>
+                    <Link to="/login" className="login-btn">Log In</Link>
+                    <Link to="/signup" className="signup-btn">Sign Up</Link>
+                </div>
             </div>
-            <div className="nav-actions">
-                <Link to="/login" className="login-btn">Log In</Link>
-                <Link to="/signup" className="signup-btn">Sign Up</Link>
-            </div>
-        </div>
-    </nav>
-);
+        </nav>
+    );
+};
 
 export default Navbar;

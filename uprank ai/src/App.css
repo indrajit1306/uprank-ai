@@ -72,6 +72,13 @@
   background: rgba(11, 11, 21, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="light"] .navbar {
+  background: rgba(255, 255, 255, 0.8);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
 .nav-container {
@@ -114,6 +121,29 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
+}
+
+.theme-toggle {
+  background: transparent;
+  color: var(--text-muted);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  border: 1px solid transparent;
+}
+
+.theme-toggle:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="light"] .theme-toggle:hover {
+  background: rgba(0, 0, 0, 0.05);
 }
 
 .login-btn,
@@ -348,7 +378,7 @@
 .logo-item {
   font-weight: 700;
   font-size: 1.25rem;
-  color: #cbd5e1;
+  color: var(--text-muted);
 }
 
 /* Choose Your Battle */
@@ -538,7 +568,8 @@
   font-size: 0.95rem;
   margin-bottom: 2rem;
   font-style: italic;
-  color: #e2e8f0;
+  font-style: italic;
+  color: var(--text-muted);
 }
 
 .user-profile {

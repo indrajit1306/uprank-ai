@@ -21,6 +21,19 @@
   color-scheme: dark;
 }
 
+[data-theme="light"] {
+  --background: #f8fafc;
+  --primary: #7c3aed;
+  --primary-hover: #6d28d9;
+  --secondary: #0891b2;
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --gradient-brand: linear-gradient(135deg, #7c3aed 0%, #0891b2 100%);
+  color-scheme: light;
+}
+
 * {
   box-sizing: border-box;
   margin: 0;
