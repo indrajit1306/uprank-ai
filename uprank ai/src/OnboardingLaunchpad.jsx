@@ -9,6 +9,53 @@ const OnboardingLaunchpad = () => {
     const navigate = useNavigate();
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
     const [checklistActive, setChecklistActive] = useState([false, false, false]);
+    const [planData, setPlanData] = useState({
+        examDate: 'August 24, 2026',
+        studyHours: 4,
+        difficulty: 'Advanced'
+        // Add more mapped data if needed
+    });
+
+    useEffect(() => {
+        // Hydrate from localStorage
+        const storedDate = localStorage.getItem('targetExamDate');
+        const storedHours = localStorage.getItem('studyHours');
+
+        let formattedDate = 'August 24, 2026';
+        if (storedDate) {
+            const dateObj = new Date(storedDate);
+            formattedDate = dateObj.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+        }
+
+        const hours = storedHours ? parseFloat(storedHours) : 4;
+
+        // Calculate Difficulty/Level based on Pulse Ratings
+        const storedPulse = localStorage.getItem('knowledgePulse');
+        let difficulty = 'Intermediate'; // Default
+
+        if (storedPulse) {
+            const ratings = JSON.parse(storedPulse);
+            const values = Object.values(ratings);
+            let score = 0;
+            // Map: low=1, mid=2, high=3
+            values.forEach(r => {
+                if (r === 'low') score += 1;
+                else if (r === 'mid') score += 2;
+                else if (r === 'high') score += 3;
+            });
+            const avg = score / values.length;
+
+            if (avg <= 1.6) difficulty = 'Foundational';
+            else if (avg <= 2.4) difficulty = 'Intermediate';
+            else difficulty = 'Advanced';
+        }
+
+        setPlanData({
+            examDate: formattedDate,
+            studyHours: hours,
+            difficulty: difficulty
+        });
+    }, []);
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
@@ -99,17 +146,17 @@ const OnboardingLaunchpad = () => {
                             </div>
                             <div className="blueprint-stat">
                                 <span className="stat-label">EXAM DATE</span>
-                                <span className="stat-value">August 24, 2024</span>
+                                <span className="stat-value">{planData.examDate}</span>
                             </div>
                             <div className="blueprint-stat">
                                 <span className="stat-label">STUDY INTENSITY</span>
-                                <span className="stat-value">4 Hours / Day</span>
+                                <span className="stat-value">{planData.studyHours} Hours / Day</span>
                             </div>
                             <div className="blueprint-stat">
                                 <span className="stat-label">DIFFICULTY LEVEL</span>
                                 <div className="difficulty-badge">
                                     <div className="difficulty-bar"></div>
-                                    <span>Advanced</span>
+                                    <span>{planData.difficulty}</span>
                                 </div>
                             </div>
                         </div>
@@ -123,13 +170,13 @@ const OnboardingLaunchpad = () => {
                     </div>
 
                     <div className="launch-actions">
-                        <button className="build-plan-btn" onClick={() => console.log('Launch!')}>
+                        <button className="build-plan-btn" onClick={() => navigate('/plan-generation')}>
                             <div className="btn-content">
                                 <span>Build My Plan & Start Learning</span>
                                 <Rocket size={20} />
                             </div>
                         </button>
-                        <button className="edit-details-btn">
+                        <button className="edit-details-btn" onClick={() => navigate('/onboarding/pulse')}>
                             Edit Details
                         </button>
                     </div>
