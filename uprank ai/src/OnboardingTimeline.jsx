@@ -1,13 +1,40 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ArrowRight, Sparkles, MoveLeft, Sun, Moon } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Sparkles, MoveLeft, Sun, Moon, Edit2 } from 'lucide-react';
 import { UpRankLogo } from './Navbar';
 import './OnboardingTimeline.css';
 
 const OnboardingTimeline = () => {
     const navigate = useNavigate();
     const [selectedDate, setSelectedDate] = useState(15);
+    const [currentMonth, setCurrentMonth] = useState(new Date(2026, 8)); // Start at Sept 2026
+    const [isEditing, setIsEditing] = useState(false);
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+    const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+
+    useEffect(() => {
+        const calculateTimeLeft = () => {
+            // Target based on current calendar month and selected day
+            const targetDate = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), selectedDate);
+            const now = new Date();
+            const difference = targetDate - now;
+
+            if (difference > 0) {
+                const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
+                const minutes = Math.floor((difference / 1000 / 60) % 60);
+                const seconds = Math.floor((difference / 1000) % 60);
+                setTimeLeft({ days, hours, minutes, seconds });
+            } else {
+                setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
+            }
+        };
+
+        calculateTimeLeft();
+        const timer = setInterval(calculateTimeLeft, 1000); // Update every second
+
+        return () => clearInterval(timer);
+    }, [selectedDate, currentMonth]);
 
     useEffect(() => {
         document.documentElement.setAttribute('data-theme', theme);
@@ -18,15 +45,48 @@ const OnboardingTimeline = () => {
         setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
     };
 
-    // Mock calendar days for September 2024
-    const days = Array.from({ length: 30 }, (_, i) => i + 1);
+    // Calendar Logic
     const weekDays = ['SU', 'MO', 'TU', 'WE', 'TH', 'FR', 'SA'];
-    // Starting blank spaces for Sept 2024 (starts on Sunday in this mock or purely visual)
-    const blanks = Array.from({ length: 0 }, (_, i) => i);
+
+    const getDaysInMonth = (date) => {
+        return new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate();
+    };
+
+    const getFirstDayOfMonth = (date) => {
+        return new Date(date.getFullYear(), date.getMonth(), 1).getDay();
+    };
+
+    const handlePrevMonth = () => {
+        setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() - 1));
+        setSelectedDate(1); // Reset select to 1st or keep logic specific
+    };
+
+    const handleNextMonth = () => {
+        setCurrentMonth(new Date(currentMonth.getFullYear(), currentMonth.getMonth() + 1));
+        setSelectedDate(1);
+    };
+
+    const daysInMonth = getDaysInMonth(currentMonth);
+    const firstDay = getFirstDayOfMonth(currentMonth);
+    const days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
+    const blanks = Array.from({ length: firstDay }, (_, i) => i);
 
     const handleDateSelect = (day) => {
         setSelectedDate(day);
     };
+
+    const handleManualDateChange = (e) => {
+        const dateVal = new Date(e.target.value);
+        if (!isNaN(dateVal.getTime())) {
+            setCurrentMonth(new Date(dateVal.getFullYear(), dateVal.getMonth(), 1));
+            setSelectedDate(dateVal.getDate());
+            setIsEditing(false);
+        }
+    };
+
+    const monthNames = ["January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+    ];
 
     return (
         <div className="timeline-container">
@@ -44,21 +104,27 @@ const OnboardingTimeline = () => {
                     <div className="countdown-timer">
                         <div className="timer-group">
                             <div className="time-box">
-                                <span className="time-val">184</span>
+                                <span className="time-val">{timeLeft.days}</span>
                             </div>
                             <span className="time-label">Days</span>
                         </div>
                         <div className="timer-group">
                             <div className="time-box">
-                                <span className="time-val">00</span>
+                                <span className="time-val">{timeLeft.hours}</span>
                             </div>
                             <span className="time-label">Hours</span>
                         </div>
                         <div className="timer-group">
                             <div className="time-box">
-                                <span className="time-val">00</span>
+                                <span className="time-val">{timeLeft.minutes}</span>
                             </div>
                             <span className="time-label">Mins</span>
+                        </div>
+                        <div className="timer-group">
+                            <div className="time-box">
+                                <span className="time-val">{timeLeft.seconds}</span>
+                            </div>
+                            <span className="time-label">Secs</span>
                         </div>
                     </div>
 
@@ -98,23 +164,42 @@ const OnboardingTimeline = () => {
 
                     <div className="calendar-card">
                         <div className="calendar-header">
-                            <button className="cal-nav-btn"><ChevronLeft size={20} /></button>
-                            <span className="current-month">September 2026</span>
-                            <button className="cal-nav-btn"><ChevronRight size={20} /></button>
+                            {isEditing ? (
+                                <input
+                                    type="date"
+                                    className="manual-date-input"
+                                    autoFocus
+                                    onChange={handleManualDateChange}
+                                    onBlur={() => setIsEditing(false)}
+                                    // Default to current selection for better UX
+                                    value={`${currentMonth.getFullYear()}-${String(currentMonth.getMonth() + 1).padStart(2, '0')}-${String(selectedDate).padStart(2, '0')}`}
+                                />
+                            ) : (
+                                <>
+                                    <button className="cal-nav-btn" onClick={handlePrevMonth}><ChevronLeft size={20} /></button>
+                                    <div className="current-month-wrapper" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                                        <span className="current-month">{monthNames[currentMonth.getMonth()]} {currentMonth.getFullYear()}</span>
+                                        <button
+                                            className="edit-date-btn"
+                                            onClick={() => setIsEditing(true)}
+                                            style={{ background: 'none', border: 'none', cursor: 'pointer', color: 'var(--text-muted)', padding: '4px' }}
+                                        >
+                                            <Edit2 size={14} />
+                                        </button>
+                                    </div>
+                                    <button className="cal-nav-btn" onClick={handleNextMonth}><ChevronRight size={20} /></button>
+                                </>
+                            )}
                         </div>
 
                         <div className="calendar-grid">
                             {weekDays.map(day => (
                                 <div key={day} className="calendar-day-label">{day}</div>
                             ))}
-                            {/* Previous month grey days mock */}
-                            <div className="calendar-date prev-month">25</div>
-                            <div className="calendar-date prev-month">26</div>
-                            <div className="calendar-date prev-month">27</div>
-                            <div className="calendar-date prev-month">28</div>
-                            <div className="calendar-date prev-month">29</div>
-                            <div className="calendar-date prev-month">30</div>
-                            <div className="calendar-date prev-month">31</div>
+                            {/* Empty cells for padding start of month */}
+                            {blanks.map((_, i) => (
+                                <div key={`blank-${i}`} className="calendar-date empty"></div>
+                            ))}
 
                             {days.map(day => (
                                 <div
@@ -134,7 +219,7 @@ const OnboardingTimeline = () => {
                         </div>
                         <div className="insight-text">
                             <h4>AI Insight</h4>
-                            <p>Based on your goal, you have <strong>184 days</strong> to prepare. This is enough time for 3 full review cycles and 15 mock exams.</p>
+                            <p>Based on your goal, you have <strong>{timeLeft.days} days</strong> to prepare. This is enough time for 3 full review cycles and 15 mock exams.</p>
                         </div>
                     </div>
 
@@ -142,7 +227,11 @@ const OnboardingTimeline = () => {
                         <button className="back-link" onClick={() => navigate('/onboarding/path')}>
                             <MoveLeft size={16} /> Back
                         </button>
-                        <button className="next-btn" onClick={() => navigate('/onboarding/rhythm')}>
+                        <button className="next-btn" onClick={() => {
+                            const target = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), selectedDate);
+                            localStorage.setItem('targetExamDate', target.toISOString());
+                            navigate('/onboarding/rhythm');
+                        }}>
                             Next: Create Study Plan <ArrowRight size={20} />
                         </button>
                     </div>

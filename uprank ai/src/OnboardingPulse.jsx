@@ -186,7 +186,10 @@ const OnboardingPulse = () => {
 
                     <div className="footer-actions">
                         <button className="skip-btn-simple">Skip for now</button>
-                        <button className="generate-btn" onClick={() => navigate('/onboarding/launchpad')}>
+                        <button className="generate-btn" onClick={() => {
+                            localStorage.setItem('knowledgePulse', JSON.stringify(ratings));
+                            navigate('/onboarding/launchpad');
+                        }}>
                             Generate My Plan <Sparkles size={16} />
                         </button>
                     </div>

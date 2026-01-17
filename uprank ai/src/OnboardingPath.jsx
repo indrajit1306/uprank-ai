@@ -99,7 +99,12 @@ const OnboardingPath = () => {
                 <div className="action-area">
                     <button
                         className="continue-btn"
-                        onClick={() => navigate('/onboarding/timeline')}
+                        onClick={() => {
+                            localStorage.setItem('selectedOnboardingPath', selectedPath);
+                            // Visual feedback via console or potential future analytics
+                            console.log(`Path selected: ${selectedPath}`);
+                            navigate('/onboarding/timeline');
+                        }}
                     >
                         Continue <ArrowRight size={20} />
                     </button>
