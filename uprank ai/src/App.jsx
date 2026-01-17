@@ -12,6 +12,8 @@ import OnboardingTimeline from './OnboardingTimeline';
 import OnboardingDailyRhythm from './OnboardingDailyRhythm';
 import OnboardingPulse from './OnboardingPulse';
 import OnboardingLaunchpad from './OnboardingLaunchpad';
+import PlanGenerationLoading from './PlanGenerationLoading';
+import PlanSuccess from './PlanSuccess';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -33,6 +35,8 @@ function App() {
           <Route path="/onboarding/rhythm" element={<OnboardingDailyRhythm />} />
           <Route path="/onboarding/pulse" element={<OnboardingPulse />} />
           <Route path="/onboarding/launchpad" element={<OnboardingLaunchpad />} />
+          <Route path="/plan-generation" element={<PlanGenerationLoading />} />
+          <Route path="/plan-success" element={<PlanSuccess />} />
         </Routes>
       </div>
     </Router>
