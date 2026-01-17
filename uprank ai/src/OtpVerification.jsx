@@ -12,6 +12,12 @@ const OtpVerification = () => {
     const [otp, setOtp] = useState(['', '', '', '', '', '']);
     const [timeLeft, setTimeLeft] = useState(600); // 10 minutes in seconds for example
     const inputsRef = useRef([]);
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
 
     useEffect(() => {
         const timer = setInterval(() => {

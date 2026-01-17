@@ -42,14 +42,18 @@ const OnboardingDailyRhythm = () => {
     }, [studyHours]);
 
     const handleSliderChange = (e) => {
-        setStudyHours(parseFloat(e.target.value));
+        const val = parseFloat(e.target.value);
+        // Clamp to min 1 if needed, or just allow 0. Let's strictly clamp to 1 for logic but use 0 for visual.
+        setStudyHours(val < 1 ? 1 : val);
     };
 
     // Gauge Logic
-    const minHours = 1;
-    const maxHours = 12;
-    // Normalize percentage 0 to 1
-    const percentage = (studyHours - minHours) / (maxHours - minHours);
+    // Gauge Logic
+    const minHours = 1; // Minimum selectable on slider
+    const maxHours = 12; // Maximum selectable and visual max
+
+    // Normalize percentage 0 to 1 based on 0 to 12 scale (so 6 is exactly middle)
+    const percentage = studyHours / maxHours;
 
     // SVG Arc geometry
     // We want a semi-circle (180 degrees).
@@ -157,7 +161,7 @@ const OnboardingDailyRhythm = () => {
                             <div className="slider-icon"><Clock size={18} /></div>
                             <input
                                 type="range"
-                                min={minHours}
+                                min="0"
                                 max={maxHours}
                                 step="0.5"
                                 value={studyHours}

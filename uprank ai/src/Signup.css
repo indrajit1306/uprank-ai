@@ -1,23 +1,22 @@
 .signup-container {
     display: flex;
     min-height: 100vh;
-    background: #0B0B15;
-    /* Matching dark theme background */
-    color: white;
+    background: var(--background);
+    color: var(--text-main);
     font-family: 'Inter', sans-serif;
-    /* Fallback */
 }
 
 /* Left Panel */
 .signup-left {
     flex: 1;
-    background: radial-gradient(circle at center, #1a1a2e 0%, #0B0B15 100%);
+    background: var(--card-bg);
+    /* Use card background or specific gradient variable */
     padding: 3rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     position: relative;
-    border-right: 1px solid rgba(255, 255, 255, 0.05);
+    border-right: 1px solid var(--border-color);
 }
 
 .brand-header {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Mail, ArrowLeft, Sparkles, Zap, Brain } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UpRankLogo } from './Navbar';
@@ -12,6 +12,12 @@ const ForgotPassword = () => {
         e.preventDefault();
         navigate('/verify-otp', { state: { email } });
     };
+    const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    }, [theme]);
 
     return (
         <div className="forgot-container">

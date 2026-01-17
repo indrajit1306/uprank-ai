@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Eye, EyeOff, Check, User, Mail, Lock } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { UpRankLogo } from './Navbar'; // Reuse logo
@@ -13,7 +13,6 @@ const Signup = () => {
         confirmPassword: '',
         agree: false
     });
-    const navigate = useNavigate();
 
     const strength = (formData.password.length / 12) * 100; // Simple fake strength calculation
 
