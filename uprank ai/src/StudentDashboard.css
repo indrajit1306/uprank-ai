@@ -253,20 +253,24 @@
 /* Removed duplicate blocks */
 
 .start-practice-btn {
-    background: #1e1b4b;
-    /* Dark button for contrast */
-    color: white;
+    background: transparent;
+    border: 2px solid #1e1b4b;
+    color: #1e1b4b;
     padding: 0.8rem 1.5rem;
     border-radius: 99px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    transition: transform 0.2s;
+    transition: all 0.3s ease;
+    cursor: pointer;
 }
 
 .start-practice-btn:hover {
+    background: #1e1b4b;
+    color: white;
     transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(30, 27, 75, 0.3);
 }
 
 /* Quick Actions */
