@@ -15,6 +15,8 @@ import OnboardingLaunchpad from './OnboardingLaunchpad';
 import PlanGenerationLoading from './PlanGenerationLoading';
 import PlanSuccess from './PlanSuccess';
 import StudentDashboard from './StudentDashboardPage';
+import SmartStudyPlan from './SmartStudyPlan';
+import MockTestInterface from './MockTestInterface';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -96,6 +98,8 @@ function App() {
           <Route path="/plan-generation" element={<PlanGenerationLoading />} />
           <Route path="/plan-success" element={<PlanSuccess />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/smart-study-plan" element={<SmartStudyPlan />} />
+          <Route path="/mock-test" element={<MockTestInterface />} />
         </Routes>
       </div>
     </Router>
