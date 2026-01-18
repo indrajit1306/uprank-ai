@@ -14,6 +14,7 @@ import OnboardingPulse from './OnboardingPulse';
 import OnboardingLaunchpad from './OnboardingLaunchpad';
 import PlanGenerationLoading from './PlanGenerationLoading';
 import PlanSuccess from './PlanSuccess';
+import StudentDashboard from './StudentDashboardPage';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -37,6 +38,7 @@ function App() {
           <Route path="/onboarding/launchpad" element={<OnboardingLaunchpad />} />
           <Route path="/plan-generation" element={<PlanGenerationLoading />} />
           <Route path="/plan-success" element={<PlanSuccess />} />
+          <Route path="/dashboard" element={<StudentDashboard />} />
         </Routes>
       </div>
     </Router>
