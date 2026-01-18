@@ -1,0 +1,41 @@
+/* Global Ripple Effect Styles */
+
+/* Ensure buttons can contain absolute ripples */
+button,
+.btn,
+.icon-btn,
+.action-card {
+    position: relative;
+    overflow: hidden;
+    /* Clips the ripple to the button shape */
+}
+
+.ripple-circle {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    /* Lighter for dark buttons */
+    transform: scale(0);
+    animation: ripple-animation 0.5s linear;
+    pointer-events: none;
+    /* Ignore clicks */
+    z-index: 100;
+    /* Ensure it's on top of text/content usually, or maybe below? standard implies top but transparent */
+}
+
+/* Adjust for light mode or white buttons might need a darker ripple */
+[data-theme="light"] .ripple-circle {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.start-practice-btn .ripple-circle {
+    /* Specific override if needed for specific buttons */
+    background: rgba(255, 255, 255, 0.4);
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
