@@ -31,14 +31,14 @@
     padding-left: 0.5rem;
 }
 
+/* Logo without background box */
 .brand-logo-small {
-    width: 32px;
-    height: 32px;
-    background: var(--gradient-brand);
-    border-radius: 8px;
+    /* width: 32px; height: 32px; - inferred from SVG */
     display: flex;
     align-items: center;
     justify-content: center;
+    background: transparent;
+    /* Remove the gradient box */
 }
 
 .brand-name {
@@ -192,36 +192,33 @@
 
 /* Hero Insight Card */
 /* Hero Insight Card */
-/* Hero Insight Card */
 .hero-insight-card {
-    background: linear-gradient(-45deg, #e0e7ff, #c7d2fe, #e9d5ff, #fae8ff);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
+    /* Beautiful Vibrant "Aurora" Animation */
+    background: linear-gradient(-45deg, #4f46e5, #7c3aed, #db2777, #2563eb);
+    background-size: 300% 300%;
+    animation: gradientBG 8s ease infinite;
     border-radius: 24px;
     padding: 2.5rem;
     position: relative;
     overflow: hidden;
-    border: 1px solid rgba(139, 92, 246, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.05);
-    color: #1e1b4b;
-    /* Dark text for light background */
+    box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.4);
+    color: white;
 }
 
-/* Ensure headings/text inside hero card are dark for the light bg */
 .hero-content h2 {
     font-size: 1.8rem;
     line-height: 1.3;
     font-weight: 700;
     margin-bottom: 1rem;
-    color: #1e1b4b;
+    color: white;
 }
 
 .hero-content p {
-    color: #475569;
-    /* Darker slate for readability on light bg */
+    color: rgba(255, 255, 255, 0.9);
     font-size: 1rem;
     margin-bottom: 2rem;
     line-height: 1.6;
@@ -245,17 +242,17 @@
     font-weight: 700;
     letter-spacing: 0.05em;
     margin-bottom: 1rem;
-    border: 1px solid rgba(139, 92, 246, 0.2);
-    color: #6d28d9;
-    background: rgba(255, 255, 255, 0.5);
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: white;
+    /* White text for badge */
+    background: rgba(255, 255, 255, 0.1);
 }
 
-/* Removed duplicate blocks */
-
 .start-practice-btn {
-    background: transparent;
-    border: 2px solid #1e1b4b;
-    color: #1e1b4b;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid white;
+    color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 99px;
     font-weight: 700;
@@ -264,13 +261,14 @@
     gap: 0.5rem;
     transition: all 0.3s ease;
     cursor: pointer;
+    backdrop-filter: blur(5px);
 }
 
 .start-practice-btn:hover {
-    background: #1e1b4b;
-    color: white;
+    background: white;
+    color: #4f46e5;
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(30, 27, 75, 0.3);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.3);
 }
 
 /* Quick Actions */
@@ -292,7 +290,17 @@
 }
 
 .action-card:hover {
-    background: #1a1a2e;
+    background: #1e1b4b;
+    /* Dark Navy hover for contrast */
+    color: white;
+    /* Ensure title becomes white */
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.action-card:hover .action-details span {
+    color: #cbd5e1;
+    /* Ensure subtitle becomes light grey */
 }
 
 .action-icon-box {

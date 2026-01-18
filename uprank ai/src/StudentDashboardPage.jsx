@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import {
     LayoutDashboard,
     BookOpen,
@@ -45,14 +46,14 @@ const StudentDashboard = () => {
                         <LayoutDashboard size={20} />
                         <span>Dashboard</span>
                     </a>
-                    <a href="#" className="nav-item">
+                    <Link to="/smart-study-plan" className="nav-item">
                         <BookOpen size={20} />
                         <span>Study Plan</span>
-                    </a>
-                    <a href="#" className="nav-item">
+                    </Link>
+                    <Link to="/mock-test" className="nav-item">
                         <ClipboardList size={20} />
                         <span>Mock Tests</span>
-                    </a>
+                    </Link>
                     <a href="#" className="nav-item">
                         <BarChart2 size={20} />
                         <span>Analytics</span>
@@ -126,7 +127,7 @@ const StudentDashboard = () => {
                                 </div>
                                 <button className="play-btn"><Play size={20} fill="currentColor" /></button>
                             </div>
-                            <div className="action-card mock">
+                            <Link to="/mock-test" className="action-card mock" style={{ textDecoration: 'none', color: 'inherit' }}>
                                 <div className="action-icon-box blue">
                                     <ClipboardList size={24} color="#3b82f6" />
                                 </div>
@@ -134,8 +135,10 @@ const StudentDashboard = () => {
                                     <h3>Full Mock Test</h3>
                                     <span>Subject Wise • 60 mins</span>
                                 </div>
-                                <button className="play-btn"><Play size={20} fill="currentColor" /></button>
-                            </div>
+                                <div className="play-btn">
+                                    <Play size={20} fill="currentColor" />
+                                </div>
+                            </Link>
                         </div>
 
                         {/* Daily Plan */}
