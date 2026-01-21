@@ -47,10 +47,10 @@ const SmartStudyPlan = () => {
                         <ClipboardList size={20} />
                         <span>Mock Tests</span>
                     </Link>
-                    <a href="#" className="nav-item">
+                    <Link to="/analytics" className="nav-item">
                         <BarChart2 size={20} />
                         <span>Analytics</span>
-                    </a>
+                    </Link>
                     <a href="#" className="nav-item">
                         <Users size={20} />
                         <span>Community</span>

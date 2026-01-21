@@ -9,15 +9,18 @@ import {
     Info,
     Timer
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './MockTestInterface.css';
 
 const MockTestInterface = () => {
+    const navigate = useNavigate();
     // State management
     const [currentSubject, setCurrentSubject] = useState('Physics');
     const [currentQuestion, setCurrentQuestion] = useState(24);
     const [selectedOption, setSelectedOption] = useState(null);
+
     const [timeLeft, setTimeLeft] = useState(9912); // seconds (2:45:12)
+    const [showSubmitModal, setShowSubmitModal] = useState(false);
 
     // Palette data simulation
     const questionPalette = Array.from({ length: 30 }, (_, i) => {
@@ -57,7 +60,10 @@ const MockTestInterface = () => {
                     <h1>JEE Main Mock Test 4</h1>
                 </div>
                 <div className="header-right">
-                    <button className="submit-btn-outline">
+                    <button
+                        className="submit-btn-outline"
+                        onClick={() => setShowSubmitModal(true)}
+                    >
                         <span className="submit-icon">→</span> Submit Test
                     </button>
                 </div>
@@ -211,6 +217,24 @@ const MockTestInterface = () => {
                     </button>
                 </div>
             </footer>
+
+            {/* Submit Confirmation Modal */}
+            {showSubmitModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <h2>Submit Test?</h2>
+                        <p>Are you sure you want to submit your test? You will not be able to change your answers after submission.</p>
+                        <div className="modal-actions">
+                            <button className="cancel-btn" onClick={() => setShowSubmitModal(false)}>Cancel</button>
+                            <button className="confirm-btn" onClick={() => {
+                                // Handle submission logic here (e.g., navigate to results)
+                                setShowSubmitModal(false);
+                                navigate('/test-result');
+                            }}>Confirm Submit</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };
