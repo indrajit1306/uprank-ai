@@ -78,6 +78,7 @@ const ExamSelection = () => {
                 </div>
                 <div className="nav-center">
                     <a href="#" className="active">Dashboard</a>
+                    <a href="#">Exams</a>
                     <a href="#">My Progress</a>
                     <a href="#">Community</a>
                 </div>
