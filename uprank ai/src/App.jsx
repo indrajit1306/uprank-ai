@@ -17,6 +17,8 @@ import PlanSuccess from './PlanSuccess';
 import StudentDashboard from './StudentDashboardPage';
 import SmartStudyPlan from './SmartStudyPlan';
 import MockTestInterface from './MockTestInterface';
+import TestResultPage from './TestResultPage';
+import PerformanceAnalytics from './PerformanceAnalytics';
 import ScrollToTop from './ScrollToTop';
 import './App.css';
 
@@ -100,6 +102,8 @@ function App() {
           <Route path="/dashboard" element={<StudentDashboard />} />
           <Route path="/smart-study-plan" element={<SmartStudyPlan />} />
           <Route path="/mock-test" element={<MockTestInterface />} />
+          <Route path="/test-result" element={<TestResultPage />} />
+          <Route path="/analytics" element={<PerformanceAnalytics />} />
         </Routes>
       </div>
     </Router>
