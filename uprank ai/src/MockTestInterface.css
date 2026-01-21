@@ -614,3 +614,76 @@
         /* Hide palette on small screens for now, or make draggable */
     }
 }
+
+/* Modal Styling */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: var(--mt-bg-panel);
+    border: 1px solid var(--mt-border);
+    padding: 2rem;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.modal-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: white;
+}
+
+.modal-content p {
+    color: var(--mt-text-muted);
+    margin-bottom: 2rem;
+    line-height: 1.5;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.modal-actions button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-size: 0.95rem;
+    flex: 1;
+}
+
+.cancel-btn {
+    background: transparent;
+    border: 1px solid var(--mt-border) !important;
+    color: var(--mt-text-muted);
+}
+
+.cancel-btn:hover {
+    border-color: white !important;
+    color: white;
+}
+
+.confirm-btn {
+    background: var(--mt-danger);
+    color: white;
+}
+
+.confirm-btn:hover {
+    background: #dc2626;
+}
