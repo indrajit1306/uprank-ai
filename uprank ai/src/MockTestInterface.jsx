@@ -16,7 +16,7 @@ const MockTestInterface = () => {
     const navigate = useNavigate();
     // State management
     const [currentSubject, setCurrentSubject] = useState('Physics');
-    const [currentQuestion, setCurrentQuestion] = useState(24);
+    const [currentQuestion, setCurrentQuestion] = useState(1);
     const [selectedOption, setSelectedOption] = useState(null);
 
     const [timeLeft, setTimeLeft] = useState(9912); // seconds (2:45:12)
@@ -26,10 +26,14 @@ const MockTestInterface = () => {
     const questionPalette = Array.from({ length: 30 }, (_, i) => {
         const num = i + 1;
         let status = 'not-visited';
-        if ([1, 2, 3, 4, 5].includes(num)) status = 'answered'; // Purple
-        else if ([24].includes(num)) status = 'current'; // Blue border
-        else if ([6].includes(num)) status = 'marked'; // Yellow
-        else if ([4].includes(num)) status = 'not-answered-reviewed'; // Red
+
+        // Simulating some previous activity
+        if ([2, 3, 5].includes(num)) status = 'answered';
+        else if ([6].includes(num)) status = 'marked';
+        else if ([4].includes(num)) status = 'not-answered-reviewed';
+
+        // Highlight current question
+        if (num === currentQuestion) status = 'current';
 
         return { id: num, status };
     });
@@ -47,6 +51,65 @@ const MockTestInterface = () => {
         const m = Math.floor((seconds % 3600) / 60);
         const s = seconds % 60;
         return `${String(h).padStart(2, '0')} : ${String(m).padStart(2, '0')} : ${String(s).padStart(2, '0')}`;
+    };
+
+    // Question Data
+    const questionsData = {
+        1: {
+            text: <span>Which of the following quantity is <strong>unitless</strong>?</span>,
+            options: [
+                { id: 'A', text: "Velocity Gradient" },
+                { id: 'B', text: "Pressure Gradient" },
+                { id: 'C', text: "Displacement Gradient" },
+                { id: 'D', text: "Force Gradient" }
+            ]
+        },
+        2: {
+            text: <span>The dimension of <strong>light year</strong> is:</span>,
+            options: [
+                { id: 'A', text: "[L]" },
+                { id: 'B', text: "[T]" },
+                { id: 'C', text: "[M]" },
+                { id: 'D', text: "[LT^-1]" }
+            ]
+        },
+        3: {
+            text: <span>Two vectors having equal magnitude of 5 units, have an angle of 60° between them. Find the magnitude of their resultant vector.</span>,
+            options: [
+                { id: 'A', text: "5" },
+                { id: 'B', text: "5√3" },
+                { id: 'C', text: "10" },
+                { id: 'D', text: "5√2" }
+            ]
+        },
+        4: {
+            text: <span>A ball is thrown vertically upward with a velocity of 20 m/s. Calculate the maximum height attained. (g = 10 m/s²)</span>,
+            options: [
+                { id: 'A', text: "10 m" },
+                { id: 'B', text: "20 m" },
+                { id: 'C', text: "40 m" },
+                { id: 'D', text: "15 m" }
+            ]
+        },
+        24: {
+            text: <span>A particle moves along a straight line such that its displacement at any time <span className="math-font">t</span> is given by <span className="code-block">s = t^3 - 6t^2 + 3t + 4</span>. Find the velocity when the acceleration is zero.</span>,
+            options: [
+                { id: 'A', text: "3 m/s" },
+                { id: 'B', text: "-9 m/s" },
+                { id: 'C', text: "42 m/s" },
+                { id: 'D', text: "-12 m/s" }
+            ]
+        }
+    };
+
+    const currentQ = questionsData[currentQuestion] || {
+        text: "Question content coming soon...",
+        options: [
+            { id: 'A', text: "Option A" },
+            { id: 'B', text: "Option B" },
+            { id: 'C', text: "Option C" },
+            { id: 'D', text: "Option D" }
+        ]
     };
 
     return (
@@ -108,45 +171,22 @@ const MockTestInterface = () => {
                     <div className="question-content">
                         <div className="q-number">Q.{currentQuestion}</div>
                         <div className="q-text">
-                            <h3>
-                                A particle moves along a straight line such that its displacement at any time <span className="math-font">t</span> is given by <span className="code-block">s = t^3 - 6t^2 + 3t + 4</span>. Find the velocity when the acceleration is zero.
-                            </h3>
+                            <h3>{currentQ.text}</h3>
                         </div>
                     </div>
 
                     <div className="options-grid">
-                        <div
-                            className={`option-card ${selectedOption === 'A' ? 'selected' : ''}`}
-                            onClick={() => setSelectedOption('A')}
-                        >
-                            <div className="opt-radio"></div>
-                            <span className="opt-text">3 m/s</span>
-                            <span className="opt-label">A</span>
-                        </div>
-                        <div
-                            className={`option-card ${selectedOption === 'B' ? 'selected' : ''}`}
-                            onClick={() => setSelectedOption('B')}
-                        >
-                            <div className="opt-radio"></div>
-                            <span className="opt-text">-9 m/s</span>
-                            <span className="opt-label">B</span>
-                        </div>
-                        <div
-                            className={`option-card ${selectedOption === 'C' ? 'selected' : ''}`}
-                            onClick={() => setSelectedOption('C')}
-                        >
-                            <div className="opt-radio"></div>
-                            <span className="opt-text">42 m/s</span>
-                            <span className="opt-label">C</span>
-                        </div>
-                        <div
-                            className={`option-card ${selectedOption === 'D' ? 'selected' : ''}`}
-                            onClick={() => setSelectedOption('D')}
-                        >
-                            <div className="opt-radio"></div>
-                            <span className="opt-text">-12 m/s</span>
-                            <span className="opt-label">D</span>
-                        </div>
+                        {currentQ.options.map((opt) => (
+                            <div
+                                key={opt.id}
+                                className={`option-card ${selectedOption === opt.id ? 'selected' : ''}`}
+                                onClick={() => setSelectedOption(opt.id)}
+                            >
+                                <div className="opt-radio"></div>
+                                <span className="opt-text">{opt.text}</span>
+                                <span className="opt-label">{opt.id}</span>
+                            </div>
+                        ))}
                     </div>
 
                     {/* Floating Timer in Question Area */}
