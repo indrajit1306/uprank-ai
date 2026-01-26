@@ -12,31 +12,25 @@ import {
 import { Link, useNavigate } from 'react-router-dom';
 import './MockTestInterface.css';
 
+import { mockQuestions } from './data/mockQuestions';
+
 const MockTestInterface = () => {
     const navigate = useNavigate();
     // State management
     const [currentSubject, setCurrentSubject] = useState('Physics');
-    const [currentQuestion, setCurrentQuestion] = useState(1);
-    const [selectedOption, setSelectedOption] = useState(null);
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 0-indexed
+    const [userAnswers, setUserAnswers] = useState({}); // { questionId: optionId }
+    const [markedForReview, setMarkedForReview] = useState([]); // [questionIds]
+    const [visitedQuestions, setVisitedQuestions] = useState(new Set([1]));
+
+    // Derived current question
+    const currentQ = mockQuestions[currentQuestionIndex];
+    const currentQuestionId = currentQ.id;
+
+    // Load initial state or answers if needed (optional, skipping for now to keep it simple)
 
     const [timeLeft, setTimeLeft] = useState(9912); // seconds (2:45:12)
     const [showSubmitModal, setShowSubmitModal] = useState(false);
-
-    // Palette data simulation
-    const questionPalette = Array.from({ length: 30 }, (_, i) => {
-        const num = i + 1;
-        let status = 'not-visited';
-
-        // Simulating some previous activity
-        if ([2, 3, 5].includes(num)) status = 'answered';
-        else if ([6].includes(num)) status = 'marked';
-        else if ([4].includes(num)) status = 'not-answered-reviewed';
-
-        // Highlight current question
-        if (num === currentQuestion) status = 'current';
-
-        return { id: num, status };
-    });
 
     // Timer countdown
     useEffect(() => {
@@ -53,81 +47,80 @@ const MockTestInterface = () => {
         return `${String(h).padStart(2, '0')} : ${String(m).padStart(2, '0')} : ${String(s).padStart(2, '0')}`;
     };
 
-    // Question Data
-    const questionsData = {
-        1: {
-            text: <span>Which of the following quantity is <strong>unitless</strong>?</span>,
-            options: [
-                { id: 'A', text: "Velocity Gradient" },
-                { id: 'B', text: "Pressure Gradient" },
-                { id: 'C', text: "Displacement Gradient" },
-                { id: 'D', text: "Force Gradient" }
-            ]
-        },
-        2: {
-            text: <span>The dimension of <strong>light year</strong> is:</span>,
-            options: [
-                { id: 'A', text: "[L]" },
-                { id: 'B', text: "[T]" },
-                { id: 'C', text: "[M]" },
-                { id: 'D', text: "[LT^-1]" }
-            ]
-        },
-        3: {
-            text: <span>Two vectors having equal magnitude of 5 units, have an angle of 60° between them. Find the magnitude of their resultant vector.</span>,
-            options: [
-                { id: 'A', text: "5" },
-                { id: 'B', text: "5√3" },
-                { id: 'C', text: "10" },
-                { id: 'D', text: "5√2" }
-            ]
-        },
-        4: {
-            text: <span>A ball is thrown vertically upward with a velocity of 20 m/s. Calculate the maximum height attained. (g = 10 m/s²)</span>,
-            options: [
-                { id: 'A', text: "10 m" },
-                { id: 'B', text: "20 m" },
-                { id: 'C', text: "40 m" },
-                { id: 'D', text: "15 m" }
-            ]
-        },
-        5: {
-            text: <span>If the error in the measurement of radius of a sphere is 2%, then the error in the determination of volume of the sphere will be:</span>,
-            options: [
-                { id: 'A', text: "8%" },
-                { id: 'B', text: "2%" },
-                { id: 'C', text: "4%" },
-                { id: 'D', text: "6%" }
-            ]
-        },
-        6: {
-            text: <span>A car moving with a speed of 50 km/h, can be stopped by brakes after at least 6m. If the same car is moving at a speed of 100 km/h, the minimum stopping distance is:</span>,
-            options: [
-                { id: 'A', text: "6m" },
-                { id: 'B', text: "12m" },
-                { id: 'C', text: "18m" },
-                { id: 'D', text: "24m" }
-            ]
-        },
-        24: {
-            text: <span>A particle moves along a straight line such that its displacement at any time <span className="math-font">t</span> is given by <span className="code-block">s = t^3 - 6t^2 + 3t + 4</span>. Find the velocity when the acceleration is zero.</span>,
-            options: [
-                { id: 'A', text: "3 m/s" },
-                { id: 'B', text: "-9 m/s" },
-                { id: 'C', text: "42 m/s" },
-                { id: 'D', text: "-12 m/s" }
-            ]
+    // Dynamic Palette generation
+    const questionPalette = mockQuestions.map((q) => {
+        let status = 'not-visited';
+        if (visitedQuestions.has(q.id)) {
+            if (userAnswers[q.id]) {
+                status = 'answered';
+                if (markedForReview.includes(q.id)) status = 'marked'; // Or some combination like 'answered-marked' if needed
+            } else {
+                status = 'not-answered';
+                if (markedForReview.includes(q.id)) status = 'marked';
+            }
+        }
+        if (q.id === currentQuestionId) status = 'current';
+        return { id: q.id, status };
+    });
+
+    // Handle Option Selection
+    const handleOptionSelect = (optionId) => {
+        setUserAnswers(prev => ({ ...prev, [currentQuestionId]: optionId }));
+    };
+
+    const handleNext = () => {
+        const nextIndex = Math.min(mockQuestions.length - 1, currentQuestionIndex + 1);
+        setCurrentQuestionIndex(nextIndex);
+        setVisitedQuestions(prev => new Set(prev).add(mockQuestions[nextIndex].id));
+    };
+
+    const handlePrev = () => {
+        const prevIndex = Math.max(0, currentQuestionIndex - 1);
+        setCurrentQuestionIndex(prevIndex);
+        setVisitedQuestions(prev => new Set(prev).add(mockQuestions[prevIndex].id));
+    };
+
+    const jumpToQuestion = (id) => {
+        const index = mockQuestions.findIndex(q => q.id === id);
+        if (index !== -1) {
+            setCurrentQuestionIndex(index);
+            setVisitedQuestions(prev => new Set(prev).add(id));
         }
     };
 
-    const currentQ = questionsData[currentQuestion] || {
-        text: "Question content coming soon...",
-        options: [
-            { id: 'A', text: "Option A" },
-            { id: 'B', text: "Option B" },
-            { id: 'C', text: "Option C" },
-            { id: 'D', text: "Option D" }
-        ]
+    const clearResponse = () => {
+        setUserAnswers(prev => {
+            const newState = { ...prev };
+            delete newState[currentQuestionId];
+            return newState;
+        });
+    };
+
+    const markReview = () => {
+        setMarkedForReview(prev => {
+            if (prev.includes(currentQuestionId)) return prev.filter(id => id !== currentQuestionId);
+            return [...prev, currentQuestionId];
+        });
+    };
+
+    const submitTest = () => {
+        // Save results to localStorage to be picked up by result page
+        localStorage.setItem('testResults', JSON.stringify({
+            answers: userAnswers,
+            questions: mockQuestions, // passing questions might be redundant if both pages import same file, but safe
+            score: calculateScore()
+        }));
+        setShowSubmitModal(false);
+        navigate('/test-result');
+    };
+
+    const calculateScore = () => {
+        let score = 0;
+        mockQuestions.forEach(q => {
+            if (userAnswers[q.id] === q.correctAnswer) score += 4;
+            else if (userAnswers[q.id]) score -= 1;
+        });
+        return score;
     };
 
     return (
@@ -187,7 +180,7 @@ const MockTestInterface = () => {
                     </div>
 
                     <div className="question-content">
-                        <div className="q-number">Q.{currentQuestion}</div>
+                        <div className="q-number">Q.{currentQuestionIndex + 1}</div>
                         <div className="q-text">
                             <h3>{currentQ.text}</h3>
                         </div>
@@ -197,8 +190,8 @@ const MockTestInterface = () => {
                         {currentQ.options.map((opt) => (
                             <div
                                 key={opt.id}
-                                className={`option-card ${selectedOption === opt.id ? 'selected' : ''}`}
-                                onClick={() => setSelectedOption(opt.id)}
+                                className={`option-card ${userAnswers[currentQuestionId] === opt.id ? 'selected' : ''}`}
+                                onClick={() => handleOptionSelect(opt.id)}
                             >
                                 <div className="opt-radio"></div>
                                 <span className="opt-text">{opt.text}</span>
@@ -239,7 +232,7 @@ const MockTestInterface = () => {
                                 <button
                                     key={q.id}
                                     className={`palette-btn ${q.status}`}
-                                    onClick={() => setCurrentQuestion(q.id)}
+                                    onClick={() => jumpToQuestion(q.id)}
                                 >
                                     {q.id}
                                     {q.status === 'marked' && <span className="marker-dot"></span>}
@@ -259,18 +252,18 @@ const MockTestInterface = () => {
             {/* Footer Actions */}
             <footer className="test-footer">
                 <div className="footer-left">
-                    <button className="action-btn-secondary box-btn">
-                        <Bookmark size={16} fill="currentColor" /> Mark for Review
+                    <button className="action-btn-secondary box-btn" onClick={markReview}>
+                        <Bookmark size={16} fill={markedForReview.includes(currentQuestionId) ? "currentColor" : "none"} /> Mark for Review
                     </button>
-                    <button className="action-btn-ghost" onClick={() => setSelectedOption(null)}>
+                    <button className="action-btn-ghost" onClick={clearResponse}>
                         <X size={16} /> Clear Response
                     </button>
                 </div>
                 <div className="footer-right">
-                    <button className="action-btn-outline" onClick={() => setCurrentQuestion(prev => Math.max(1, prev - 1))}>
+                    <button className="action-btn-outline" onClick={handlePrev} disabled={currentQuestionIndex === 0}>
                         <ChevronLeft size={16} /> Previous
                     </button>
-                    <button className="action-btn-primary" onClick={() => setCurrentQuestion(prev => Math.min(30, prev + 1))}>
+                    <button className="action-btn-primary" onClick={handleNext}>
                         Save & Next <ChevronRight size={16} />
                     </button>
                 </div>
@@ -284,11 +277,7 @@ const MockTestInterface = () => {
                         <p>Are you sure you want to submit your test? You will not be able to change your answers after submission.</p>
                         <div className="modal-actions">
                             <button className="cancel-btn" onClick={() => setShowSubmitModal(false)}>Cancel</button>
-                            <button className="confirm-btn" onClick={() => {
-                                // Handle submission logic here (e.g., navigate to results)
-                                setShowSubmitModal(false);
-                                navigate('/test-result');
-                            }}>Confirm Submit</button>
+                            <button className="confirm-btn" onClick={submitTest}>Confirm Submit</button>
                         </div>
                     </div>
                 </div>
