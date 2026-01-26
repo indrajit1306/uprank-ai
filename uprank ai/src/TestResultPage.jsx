@@ -38,6 +38,15 @@ const TestResultPage = () => {
     const questionsToDisplay = testData ? testData.questions : [];
     const answers = testData ? testData.answers : {};
 
+    const userScore = testData ? testData.score : 0;
+    const maxScore = questionsToDisplay.length > 0 ? questionsToDisplay.length * 4 : 0;
+
+    // Calculate Accuracy
+    const attemptedCount = Object.keys(answers).length;
+    const correctCount = questionsToDisplay.filter(q => answers[q.id] === q.correctAnswer).length;
+    const incorrectCount = attemptedCount - correctCount;
+    const accuracy = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
+
     const toggleRow = (id) => {
         setExpandedRow(expandedRow === id ? null : id);
     };
@@ -109,8 +118,8 @@ const TestResultPage = () => {
                     <div className="stat-box">
                         <div className="stat-label">TOTAL SCORE</div>
                         <div className="stat-value">
-                            <span className="big">145</span>
-                            <span className="total">/ 200</span>
+                            <span className="big">{userScore}</span>
+                            <span className="total">/ {maxScore}</span>
                         </div>
                         <div className="stat-trend pos">
                             <TrendingUpArrow /> +12% <span>from last test</span>
@@ -132,13 +141,13 @@ const TestResultPage = () => {
                     <div className="stat-box">
                         <div className="stat-label">ACCURACY</div>
                         <div className="stat-value">
-                            <span className="big">85%</span>
+                            <span className="big">{accuracy}%</span>
                         </div>
                         <div className="progress-bar-sm">
-                            <div className="fill-purple" style={{ width: '85%' }}></div>
+                            <div className="fill-purple" style={{ width: `${accuracy}%` }}></div>
                         </div>
                         <div className="stat-trend neutral">
-                            45 Correct • 8 Incorrect
+                            {correctCount} Correct • {incorrectCount} Incorrect
                         </div>
                         <Crosshair className="stat-bg-icon" />
                     </div>
