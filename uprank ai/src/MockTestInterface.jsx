@@ -91,6 +91,24 @@ const MockTestInterface = () => {
                 { id: 'D', text: "15 m" }
             ]
         },
+        5: {
+            text: <span>If the error in the measurement of radius of a sphere is 2%, then the error in the determination of volume of the sphere will be:</span>,
+            options: [
+                { id: 'A', text: "8%" },
+                { id: 'B', text: "2%" },
+                { id: 'C', text: "4%" },
+                { id: 'D', text: "6%" }
+            ]
+        },
+        6: {
+            text: <span>A car moving with a speed of 50 km/h, can be stopped by brakes after at least 6m. If the same car is moving at a speed of 100 km/h, the minimum stopping distance is:</span>,
+            options: [
+                { id: 'A', text: "6m" },
+                { id: 'B', text: "12m" },
+                { id: 'C', text: "18m" },
+                { id: 'D', text: "24m" }
+            ]
+        },
         24: {
             text: <span>A particle moves along a straight line such that its displacement at any time <span className="math-font">t</span> is given by <span className="code-block">s = t^3 - 6t^2 + 3t + 4</span>. Find the velocity when the acceleration is zero.</span>,
             options: [
