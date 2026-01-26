@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     LayoutDashboard,
     BookOpen,
@@ -25,6 +25,23 @@ import { UpRankLogo } from './Navbar';
 import './TestResultPage.css';
 
 const TestResultPage = () => {
+    const [testData, setTestData] = useState(null);
+    const [expandedRow, setExpandedRow] = useState(null);
+
+    useEffect(() => {
+        const stored = localStorage.getItem('testResults');
+        if (stored) {
+            setTestData(JSON.parse(stored));
+        }
+    }, []);
+
+    const questionsToDisplay = testData ? testData.questions : [];
+    const answers = testData ? testData.answers : {};
+
+    const toggleRow = (id) => {
+        setExpandedRow(expandedRow === id ? null : id);
+    };
+
     return (
         <div className="result-page-container">
             {/* Navbar */}
@@ -211,10 +228,41 @@ const TestResultPage = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <TableRow q="01" sub="Math" topic="Linear Equations" res="Correct" time="1m 12s" />
-                                <TableRow q="02" sub="Math" topic="Geometry" res="Incorrect" time="3m 45s" slow={true} />
-                                <TableRow q="03" sub="Logic" topic="Syllogism" res="Unattempted" time="0m 00s" />
-                                <TableRow q="04" sub="Math" topic="Calculus" res="Correct" time="2m 10s" />
+                                {questionsToDisplay.length > 0 ? (
+                                    questionsToDisplay.map((q, index) => {
+                                        const userAnswer = answers[q.id];
+                                        const isCorrect = userAnswer === q.correctAnswer;
+                                        const status = !userAnswer ? 'Unattempted' : isCorrect ? 'Correct' : 'Incorrect';
+
+                                        return (
+                                            <React.Fragment key={q.id}>
+                                                <TableRow
+                                                    q={(index + 1).toString().padStart(2, '0')}
+                                                    sub={q.subject}
+                                                    topic={q.topic}
+                                                    res={status}
+                                                    time="--:--"
+                                                    onView={() => toggleRow(q.id)}
+                                                />
+                                                {/* Expanded Row for Answer */}
+                                                {expandedRow === q.id && (
+                                                    <tr className="expanded-row">
+                                                        <td colSpan="6">
+                                                            <div style={{ padding: '10px 20px', background: '#f9fafb', borderLeft: '3px solid #6366f1' }}>
+                                                                <p><strong>Question:</strong> {q.text}</p>
+                                                                <p><strong>Correct Answer:</strong> {q.correctAnswer}</p>
+                                                                {userAnswer && <p><strong>Your Answer:</strong> {userAnswer}</p>}
+                                                                <p><strong>Explanation:</strong> {q.explanation}</p>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                )}
+                                            </React.Fragment>
+                                        );
+                                    })
+                                ) : (
+                                    <tr><td colSpan="6" style={{ textAlign: 'center', padding: '20px' }}>No Test Data Found. Please take a test first.</td></tr>
+                                )}
                             </tbody>
                         </table>
                     </div>
@@ -259,7 +307,7 @@ const SubjectBar = ({ name, percent, color }) => (
     </div>
 );
 
-const TableRow = ({ q, sub, topic, res, time, slow }) => {
+const TableRow = ({ q, sub, topic, res, time, slow, onView }) => {
     const getBadgeClass = (status) => {
         if (status === 'Correct') return 'badge-correct';
         if (status === 'Incorrect') return 'badge-incorrect';
@@ -287,7 +335,7 @@ const TableRow = ({ q, sub, topic, res, time, slow }) => {
                 {time} {slow && <span className="tag-slow">(Slow)</span>}
             </td>
             <td>
-                <button className="btn-text-blue">View</button>
+                <button className="btn-text-blue" onClick={onView}>View</button>
             </td>
         </tr>
     );
