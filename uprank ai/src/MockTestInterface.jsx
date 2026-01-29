@@ -17,7 +17,7 @@ import { mockQuestions } from './data/mockQuestions';
 const MockTestInterface = () => {
     const navigate = useNavigate();
     // State management
-    const [currentSubject, setCurrentSubject] = useState('Physics');
+
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 0-indexed
     const [userAnswers, setUserAnswers] = useState({}); // { questionId: optionId }
     const [markedForReview, setMarkedForReview] = useState([]); // [questionIds]
@@ -26,6 +26,7 @@ const MockTestInterface = () => {
     // Derived current question
     const currentQ = mockQuestions[currentQuestionIndex];
     const currentQuestionId = currentQ.id;
+    const currentSubject = currentQ ? currentQ.subject : 'Physics';
 
     // Load initial state or answers if needed (optional, skipping for now to keep it simple)
 
@@ -145,24 +146,20 @@ const MockTestInterface = () => {
 
             {/* Sub-Header / Tabs */}
             <div className="test-tabs">
-                <button
-                    className={`tab-btn ${currentSubject === 'Physics' ? 'active' : ''}`}
-                    onClick={() => setCurrentSubject('Physics')}
-                >
-                    Physics
-                </button>
-                <button
-                    className={`tab-btn ${currentSubject === 'Chemistry' ? 'active' : ''}`}
-                    onClick={() => setCurrentSubject('Chemistry')}
-                >
-                    Chemistry
-                </button>
-                <button
-                    className={`tab-btn ${currentSubject === 'Maths' ? 'active' : ''}`}
-                    onClick={() => setCurrentSubject('Maths')}
-                >
-                    Maths
-                </button>
+                {['Physics', 'Chemistry', 'Maths', 'Biology'].map((subject) => (
+                    <button
+                        key={subject}
+                        className={`tab-btn ${currentSubject === subject ? 'active' : ''}`}
+                        onClick={() => {
+                            const firstQuestionIndex = mockQuestions.findIndex(q => q.subject === subject);
+                            if (firstQuestionIndex !== -1) {
+                                setCurrentQuestionIndex(firstQuestionIndex);
+                            }
+                        }}
+                    >
+                        {subject}
+                    </button>
+                ))}
             </div>
 
             {/* Main Layout */}
