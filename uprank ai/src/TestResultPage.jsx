@@ -47,6 +47,26 @@ const TestResultPage = () => {
     const incorrectCount = attemptedCount - correctCount;
     const accuracy = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
 
+    // Calculate Subject-wise Performance
+    const subjectStats = ['Physics', 'Chemistry', 'Maths', 'Biology'].map(subject => {
+        const subjectQuestions = questionsToDisplay.filter(q => q.subject === subject);
+        if (subjectQuestions.length === 0) return null;
+
+        const subCorrect = subjectQuestions.filter(q => answers[q.id] === q.correctAnswer).length;
+        const subTotal = subjectQuestions.length;
+        const subPercent = Math.round((subCorrect / subTotal) * 100);
+
+        // Color mapping
+        const colors = {
+            'Physics': '#6366f1',
+            'Chemistry': '#ef4444',
+            'Maths': '#f59e0b',
+            'Biology': '#10b981'
+        };
+
+        return { name: subject, percent: subPercent, color: colors[subject] || '#888888' };
+    }).filter(Boolean);
+
     const toggleRow = (id) => {
         setExpandedRow(expandedRow === id ? null : id);
     };
@@ -83,7 +103,7 @@ const TestResultPage = () => {
                             <span className="status-badge completed">COMPLETED</span>
                             <span className="date-text">Oct 24, 2026</span>
                         </div>
-                        <h1>Mock Test 5: Advanced Mathematics</h1>
+                        <h1>Mock Test 5: Full Mock Test</h1>
                         <div className="meta-info">
                             <Clock size={16} /> 2 hours 15 mins
                         </div>
@@ -195,9 +215,9 @@ const TestResultPage = () => {
                         <div className="breakdown-section">
                             <h3>Subject Breakdown</h3>
                             <div className="subject-list">
-                                <SubjectBar name="Algebra" percent={92} color="#6366f1" />
-                                <SubjectBar name="Geometry" percent={40} color="#ef4444" />
-                                <SubjectBar name="Calculus" percent={65} color="#f59e0b" />
+                                {subjectStats.map(stat => (
+                                    <SubjectBar key={stat.name} name={stat.name} percent={stat.percent} color={stat.color} />
+                                ))}
                             </div>
                         </div>
                         <div className="recommendations-section">
