@@ -278,10 +278,29 @@ const TestResultPage = () => {
                                                     <tr className="expanded-row">
                                                         <td colSpan="6">
                                                             <div style={{ padding: '10px 20px', background: '#f9fafb', borderLeft: '3px solid #6366f1' }}>
-                                                                <p><strong>Question:</strong> {q.text}</p>
-                                                                <p><strong>Correct Answer:</strong> {q.correctAnswer}</p>
-                                                                {userAnswer && <p><strong>Your Answer:</strong> {userAnswer}</p>}
-                                                                <p><strong>Explanation:</strong> {q.explanation}</p>
+                                                                <p className="mb-2"><strong>Question:</strong> {q.text}</p>
+
+                                                                {(() => {
+                                                                    const correctOpt = q.options.find(opt => opt.id === q.correctAnswer);
+                                                                    const userOpt = userAnswer ? q.options.find(opt => opt.id === userAnswer) : null;
+
+                                                                    return (
+                                                                        <div className="answer-details">
+                                                                            <p className="mb-1" style={{ color: '#166534' }}>
+                                                                                <strong>Correct Answer:</strong> {q.correctAnswer} - {correctOpt?.text}
+                                                                            </p>
+                                                                            {userAnswer ? (
+                                                                                <p className="mb-1" style={{ color: isCorrect ? '#166534' : '#991b1b' }}>
+                                                                                    <strong>Your Answer:</strong> {userAnswer} - {userOpt?.text}
+                                                                                </p>
+                                                                            ) : (
+                                                                                <p className="mb-1 text-muted"><strong>Your Answer:</strong> Unattempted</p>
+                                                                            )}
+                                                                        </div>
+                                                                    );
+                                                                })()}
+
+                                                                <p className="mt-2 text-gray-700"><strong>Explanation:</strong> {q.explanation}</p>
                                                             </div>
                                                         </td>
                                                     </tr>
