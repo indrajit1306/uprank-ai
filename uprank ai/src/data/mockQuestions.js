@@ -565,5 +565,94 @@ export const mockQuestions = [
         ],
         correctAnswer: 'C',
         explanation: "Scurvy is a disease resulting from a lack of vitamin C (ascorbic acid)."
+    },
+    // --- LOGICAL REASONING (41-45) ---
+    {
+        id: 41,
+        subject: 'Logical Reasoning',
+        topic: 'Series',
+        text: "Look at this series: 2, 1, (1/2), (1/4), ... What number should come next?",
+        options: [
+            { id: 'A', text: "(1/3)" },
+            { id: 'B', text: "(1/8)" },
+            { id: 'C', text: "(2/8)" },
+            { id: 'D', text: "(1/16)" }
+        ],
+        correctAnswer: 'B',
+        explanation: "This is a simple division series; each number is one-half of the previous number."
+    },
+    {
+        id: 42,
+        subject: 'Logical Reasoning',
+        topic: 'Analogy',
+        text: "Odometer is to mileage as compass is to?",
+        options: [
+            { id: 'A', text: "Speed" },
+            { id: 'B', text: "Hiking" },
+            { id: 'C', text: "Needle" },
+            { id: 'D', text: "Direction" }
+        ],
+        correctAnswer: 'D',
+        explanation: "An odometer is an instrument used to measure mileage. A compass is an instrument used to determine direction."
+    },
+
+    // --- ENGLISH (46-50) ---
+    {
+        id: 46,
+        subject: 'English',
+        topic: 'Synonyms',
+        text: "Select the synonym of: BRIEF",
+        options: [
+            { id: 'A', text: "Limited" },
+            { id: 'B', text: "Small" },
+            { id: 'C', text: "Little" },
+            { id: 'D', text: "Short" }
+        ],
+        correctAnswer: 'D',
+        explanation: "Brief means of short duration."
+    },
+    {
+        id: 47,
+        subject: 'English',
+        topic: 'Antonyms',
+        text: "Select the antonym of: ENORMOUS",
+        options: [
+            { id: 'A', text: "Soft" },
+            { id: 'B', text: "Average" },
+            { id: 'C', text: "Tiny" },
+            { id: 'D', text: "Weak" }
+        ],
+        correctAnswer: 'C',
+        explanation: "Enormous means very large; Tiny means very small."
+    },
+
+    // --- APTITUDE (51-55) ---
+    {
+        id: 51,
+        subject: 'Aptitude',
+        topic: 'Percentages',
+        text: "What is 20% of 50% of 75% of 80?",
+        options: [
+            { id: 'A', text: "12" },
+            { id: 'B', text: "6" },
+            { id: 'C', text: "5" },
+            { id: 'D', text: "2.5" }
+        ],
+        correctAnswer: 'B',
+        explanation: "(20/100) * (50/100) * (75/100) * 80 = (1/5)*(1/2)*(3/4)*80 = 6."
+    },
+    {
+        id: 52,
+        subject: 'Aptitude',
+        topic: 'Time and Work',
+        text: "A can do a work in 15 days and B in 20 days. If they work on it together for 4 days, then the fraction of the work that is left is:",
+        options: [
+            { id: 'A', text: "1/4" },
+            { id: 'B', text: "1/10" },
+            { id: 'C', text: "7/15" },
+            { id: 'D', text: "8/15" }
+        ],
+        correctAnswer: 'D',
+        explanation: "A's 1 day work = 1/15, B's 1 day work = 1/20. (A+B)'s 1 day = 7/60. 4 days = 28/60 = 7/15. Remaining = 1 - 7/15 = 8/15."
     }
 ];
