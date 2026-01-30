@@ -38,7 +38,6 @@ const TestResultPage = () => {
     const questionsToDisplay = testData ? testData.questions : [];
     const answers = testData ? testData.answers : {};
 
-    const userScore = testData ? testData.score : 0;
     const maxScore = questionsToDisplay.length > 0 ? questionsToDisplay.length * 4 : 0;
 
     // Calculate Accuracy
@@ -46,6 +45,9 @@ const TestResultPage = () => {
     const correctCount = questionsToDisplay.filter(q => answers[q.id] === q.correctAnswer).length;
     const incorrectCount = attemptedCount - correctCount;
     const accuracy = attemptedCount > 0 ? Math.round((correctCount / attemptedCount) * 100) : 0;
+
+    // Calculate Score (+4 for Correct, -1 for Incorrect)
+    const userScore = (correctCount * 4) - incorrectCount;
 
     // Calculate Subject-wise Performance
     const subjectStats = ['Physics', 'Chemistry', 'Maths', 'Biology'].map(subject => {
