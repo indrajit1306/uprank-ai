@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import { Link, useNavigate } from 'react-router-dom';
 import './MockTestInterface.css';
+import SubmitTestModal from './SubmitTestModal';
 
 import { mockQuestions } from './data/mockQuestions';
 
@@ -122,6 +123,30 @@ const MockTestInterface = () => {
             else if (userAnswers[q.id]) score -= 1;
         });
         return score;
+    };
+
+    const getSummaryStats = () => {
+        const total = mockQuestions.length;
+        const marked = markedForReview.length;
+
+        // Count total answered questions
+        const answeredIds = Object.keys(userAnswers).map(id => Number(id)); // Keys are strings
+        const totalAnswered = answeredIds.length;
+
+        // Count how many accepted answers are also marked for review
+        // (These will be counted in 'Marked' bucket, so remove from 'Answered' bucket)
+        const markedSet = new Set(markedForReview);
+        const answeredAndMarked = answeredIds.filter(id => markedSet.has(id)).length;
+
+        const displayAnswered = totalAnswered - answeredAndMarked;
+        const displayMarked = marked;
+        const displayUnanswered = total - displayAnswered - displayMarked;
+
+        return {
+            answered: displayAnswered,
+            unanswered: displayUnanswered,
+            marked: displayMarked
+        };
     };
 
     return (
@@ -266,19 +291,13 @@ const MockTestInterface = () => {
                 </div>
             </footer>
 
-            {/* Submit Confirmation Modal */}
-            {showSubmitModal && (
-                <div className="modal-overlay">
-                    <div className="modal-content">
-                        <h2>Submit Test?</h2>
-                        <p>Are you sure you want to submit your test? You will not be able to change your answers after submission.</p>
-                        <div className="modal-actions">
-                            <button className="cancel-btn" onClick={() => setShowSubmitModal(false)}>Cancel</button>
-                            <button className="confirm-btn" onClick={submitTest}>Confirm Submit</button>
-                        </div>
-                    </div>
-                </div>
-            )}
+            <SubmitTestModal
+                isOpen={showSubmitModal}
+                onClose={() => setShowSubmitModal(false)}
+                onSubmit={submitTest}
+                summary={getSummaryStats()}
+                timeLeft={formatTime(timeLeft)}
+            />
         </div>
     );
 };
