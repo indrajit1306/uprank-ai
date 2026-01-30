@@ -20,6 +20,7 @@ import MockTestInterface from './MockTestInterface';
 import TestResultPage from './TestResultPage';
 import PerformanceAnalytics from './PerformanceAnalytics';
 import ScrollToTop from './ScrollToTop';
+import GlobalSidebar from './components/GlobalSidebar';
 import './App.css';
 
 function App() {
@@ -83,6 +84,7 @@ function App() {
   return (
     <Router>
       <ScrollToTop />
+      <GlobalSidebar />
       <div className="app">
         <Routes>
           <Route path="/" element={<LandingPage />} />
