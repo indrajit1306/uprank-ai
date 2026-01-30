@@ -50,7 +50,8 @@ const TestResultPage = () => {
     const userScore = (correctCount * 4) - incorrectCount;
 
     // Calculate Subject-wise Performance
-    const subjectStats = ['Physics', 'Chemistry', 'Maths', 'Biology'].map(subject => {
+    const distinctSubjects = [...new Set(questionsToDisplay.map(q => q.subject))];
+    const subjectStats = distinctSubjects.map(subject => {
         const subjectQuestions = questionsToDisplay.filter(q => q.subject === subject);
         if (subjectQuestions.length === 0) return null;
 
@@ -63,7 +64,10 @@ const TestResultPage = () => {
             'Physics': '#6366f1',
             'Chemistry': '#ef4444',
             'Maths': '#f59e0b',
-            'Biology': '#10b981'
+            'Biology': '#10b981',
+            'Logical Reasoning': '#8b5cf6', // Violet
+            'English': '#ec4899', // Pink
+            'Aptitude': '#06b6d4' // Cyan
         };
 
         return { name: subject, percent: subPercent, color: colors[subject] || '#888888' };
