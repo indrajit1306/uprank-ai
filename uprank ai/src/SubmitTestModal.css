@@ -1,0 +1,231 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Dark overlay */
+    backdrop-filter: blur(4px);
+    /* Blur effect */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.submission-modal {
+    background: white;
+    width: 100%;
+    max-width: 650px;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    font-family: 'Inter', sans-serif;
+    /* Assuming Inter or similar */
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.modal-header {
+    margin-bottom: 24px;
+}
+
+.breadcrumb {
+    font-size: 0.85rem;
+    color: #667085;
+    /* Grayish */
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.modal-header h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #101828;
+    /* Dark text */
+    margin: 0 0 8px 0;
+}
+
+.subtitle {
+    font-size: 1rem;
+    color: #666085;
+    /* Purpleish-Grayish */
+    margin: 0;
+}
+
+/* Stats Grid */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.stat-card {
+    border: 1px solid #E4E7EC;
+    border-radius: 12px;
+    padding: 16px;
+    background: #F9FAFB;
+    /* Very light gray */
+}
+
+.stat-card.answered .icon {
+    color: white;
+    fill: #12B76A;
+    /* Green fill */
+    /* stroke is white, so tick is white. Circle border is white */
+}
+
+.stat-card.unanswered .icon {
+    color: #98A2B3;
+    fill: transparent;
+}
+
+.stat-card.marked .icon {
+    color: #7F56D9;
+    fill: #7F56D9;
+    /* Purple filled */
+}
+
+.stat-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.stat-header span {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #344054;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #101828;
+}
+
+.stat-card.unanswered .stat-value {
+    color: #98A2B3;
+}
+
+/* Specific icon styles adjustment */
+.stat-card.answered .icon {
+    /* Lucide CheckCircle2 is outlined by default layout */
+    color: #039855;
+    fill: #DCFAE6;
+    /* Light green fill if applicable logic */
+    /* CheckCircle2 is filled version? No, usually outline. 
+       Let's assume user wants outlined green check */
+}
+
+.stat-card.marked .icon {
+    fill: currentColor;
+    /* Fill the bookmark */
+}
+
+
+/* Warning Section */
+.warning-section {
+    background-color: #FFFAEB;
+    /* Light yellow/orange bg */
+    border: 1px solid #FEDF89;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+}
+
+.warning-timer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #B54708;
+    /* Dark orange */
+    font-size: 1rem;
+    margin-bottom: 8px;
+}
+
+.warning-timer .timer-icon {
+    color: #F79009;
+    fill: #F79009;
+    /* Filled orange timer */
+    color: white;
+    /* Timer strokes white */
+}
+
+/* Wait, timer icon in image looks orange filled with white details or just orange. 
+   Lucide Timer is outline. I'll just color it orange. */
+.warning-timer .timer-icon {
+    color: #F79009;
+    fill: none;
+}
+
+.warning-text {
+    font-size: 0.95rem;
+    color: #4A4A6A;
+    /* Dark purple/gray */
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Modal Footer */
+.modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.btn-return {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid #D0D5DD;
+    background: white;
+    color: #344054;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-return:hover {
+    background: #F9FAFB;
+}
+
+.btn-submit {
+    padding: 10px 24px;
+    border-radius: 8px;
+    border: none;
+    background: #6941C6;
+    /* Purple */
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.2s;
+    box-shadow: 0 1px 2px rgba(16, 24, 40, 0.05);
+}
+
+.btn-submit:hover {
+    background: #53389E;
+}
+
+.btn-submit .check-icon {
+    font-size: 1.1em;
+}
