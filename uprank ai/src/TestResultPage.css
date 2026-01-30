@@ -268,7 +268,9 @@
 }
 
 .stat-box {
-    background: var(--res-card-bg);
+    background: #17152e;
+    /* Slightly darker background for better contrast */
+    border: 1px solid #2e2b52;
     border-radius: 16px;
     padding: 1.5rem;
     position: relative;
@@ -278,24 +280,30 @@
 .stat-label {
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--res-text-muted);
+    color: #cbd5e1;
+    /* Lighter grey for better visibility */
     letter-spacing: 0.05em;
     margin-bottom: 0.5rem;
+    text-transform: uppercase;
 }
 
 .stat-value {
     margin-bottom: 0.5rem;
+    color: #ffffff;
+    /* Explicitly white */
 }
 
 .stat-value .big {
     font-size: 2.2rem;
     font-weight: 800;
     font-family: 'Space Grotesk', sans-serif;
+    color: #ffffff;
+    /* Force white */
 }
 
 .stat-value .total {
     font-size: 1rem;
-    color: var(--res-text-muted);
+    color: #94a3b8;
     margin-left: 0.3rem;
 }
 
