@@ -13,23 +13,42 @@ import { Link, useNavigate } from 'react-router-dom';
 import './MockTestInterface.css';
 import SubmitTestModal from './SubmitTestModal';
 
-import { mockQuestions } from './data/mockQuestions';
+import { useSearchParams } from 'react-router-dom';
+import { EXAM_CONFIG, getQuestionsForExam } from './utils/examConfig';
+import { mockQuestions as allQuestions } from './data/mockQuestions';
 
 const MockTestInterface = () => {
     const navigate = useNavigate();
-    // State management
+    const [searchParams] = useSearchParams();
 
-    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 0-indexed
+    // Determine Exam Type (Default to JEE if not specified)
+    // You can test by visiting /mock-test?type=NEET or /mock-test?type=GOVT
+    const examType = searchParams.get('type') || 'JEE';
+    const currentConfig = EXAM_CONFIG[examType] || EXAM_CONFIG['JEE'];
+
+    // Filter questions based on exam configuration
+    const mockQuestions = getQuestionsForExam(allQuestions, examType);
+    const subjects = currentConfig.subjects;
+
+    // State management
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0); // 0-indexed across filtered questions
     const [userAnswers, setUserAnswers] = useState({}); // { questionId: optionId }
     const [markedForReview, setMarkedForReview] = useState([]); // [questionIds]
-    const [visitedQuestions, setVisitedQuestions] = useState(new Set([1]));
+    const [visitedQuestions, setVisitedQuestions] = useState(new Set()); // Initialize later based on first Q
 
     // Derived current question
     const currentQ = mockQuestions[currentQuestionIndex];
-    const currentQuestionId = currentQ.id;
-    const currentSubject = currentQ ? currentQ.subject : 'Physics';
+    if (!currentQ) return <div className="p-8 text-white">Loading questions for {examType}...</div>;
 
-    // Load initial state or answers if needed (optional, skipping for now to keep it simple)
+    const currentQuestionId = currentQ.id;
+    const currentSubject = currentQ.subject; // Dynamic subject from current question
+
+    useEffect(() => {
+        // Initialize visited with first Q if empty
+        if (mockQuestions.length > 0 && visitedQuestions.size === 0) {
+            setVisitedQuestions(new Set([mockQuestions[0].id]));
+        }
+    }, [mockQuestions]);
 
     const [timeLeft, setTimeLeft] = useState(9912); // seconds (2:45:12)
     const [showSubmitModal, setShowSubmitModal] = useState(false);
@@ -55,13 +74,13 @@ const MockTestInterface = () => {
         if (visitedQuestions.has(q.id)) {
             if (userAnswers[q.id]) {
                 status = 'answered';
-                if (markedForReview.includes(q.id)) status = 'marked'; // Or some combination like 'answered-marked' if needed
+                if (markedForReview.includes(q.id)) status = 'marked';
             } else {
                 status = 'not-answered';
                 if (markedForReview.includes(q.id)) status = 'marked';
             }
         }
-        if (q.id === currentQuestionId) status = 'current';
+        if (currentQ && q.id === currentQ.id) status = 'current';
         return { id: q.id, status };
     });
 
@@ -171,7 +190,7 @@ const MockTestInterface = () => {
 
             {/* Sub-Header / Tabs */}
             <div className="test-tabs">
-                {['Physics', 'Chemistry', 'Maths', 'Biology'].map((subject) => (
+                {subjects.map((subject) => (
                     <button
                         key={subject}
                         className={`tab-btn ${currentSubject === subject ? 'active' : ''}`}
