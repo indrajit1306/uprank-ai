@@ -20,11 +20,12 @@ import {
     ChevronRight,
     Search
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UpRankLogo } from './Navbar';
 import './TestResultPage.css';
 
 const TestResultPage = () => {
+    const navigate = useNavigate();
     const [testData, setTestData] = useState(null);
     const [expandedRow, setExpandedRow] = useState(null);
 
@@ -115,7 +116,7 @@ const TestResultPage = () => {
                         </div>
                     </div>
                     <div className="header-actions">
-                        <button className="btn-outline-dark">
+                        <button className="btn-outline-dark" onClick={() => navigate('/view-solution')}>
                             <Eye size={18} /> View Solutions
                         </button>
                         <button className="btn-primary-purple">
