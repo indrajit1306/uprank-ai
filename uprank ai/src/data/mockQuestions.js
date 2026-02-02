@@ -654,5 +654,154 @@ export const mockQuestions = [
         ],
         correctAnswer: 'D',
         explanation: "A's 1 day work = 1/15, B's 1 day work = 1/20. (A+B)'s 1 day = 7/60. 4 days = 28/60 = 7/15. Remaining = 1 - 7/15 = 8/15."
+    },
+    // --- HISTORY (53-54) ---
+    {
+        id: 53,
+        subject: 'History',
+        topic: 'Modern History',
+        text: "Who among the following wrote the book 'Poverty and Un-British Rule in India'?",
+        options: [
+            { id: 'A', text: "Dadabhai Naoroji" },
+            { id: 'B', text: "R.C. Dutt" },
+            { id: 'C', text: "Mahatma Gandhi" },
+            { id: 'D', text: "Jawaharlal Nehru" }
+        ],
+        correctAnswer: 'A',
+        explanation: "Dadabhai Naoroji wrote 'Poverty and Un-British Rule in India' which exposed the economic drainage of India by the British."
+    },
+    {
+        id: 54,
+        subject: 'History',
+        topic: 'Ancient History',
+        text: "Which of the following Harappan sites is located in Gujarat?",
+        options: [
+            { id: 'A', text: "Kalibangan" },
+            { id: 'B', text: "Ropar" },
+            { id: 'C', text: "Banavali" },
+            { id: 'D', text: "Dholavira" }
+        ],
+        correctAnswer: 'D',
+        explanation: "Dholavira is an archaeological site at Khadirbet in Bhachau Taluka of Kutch District, in the state of Gujarat."
+    },
+
+    // --- GEOGRAPHY (55-56) ---
+    {
+        id: 55,
+        subject: 'Geography',
+        topic: 'Indian Drainage System',
+        text: "Which river is known as the 'Sorrow of Bihar'?",
+        options: [
+            { id: 'A', text: "Ganga" },
+            { id: 'B', text: "Kosi" },
+            { id: 'C', text: "Son" },
+            { id: 'D', text: "Gandak" }
+        ],
+        correctAnswer: 'B',
+        explanation: "The Kosi River is known as the 'Sorrow of Bihar' due to its frequent and devastating floods."
+    },
+    {
+        id: 56,
+        subject: 'Geography',
+        topic: 'Solar System',
+        text: "Which planet is known as the 'Red Planet'?",
+        options: [
+            { id: 'A', text: "Venus" },
+            { id: 'B', text: "Mars" },
+            { id: 'C', text: "Jupiter" },
+            { id: 'D', text: "Saturn" }
+        ],
+        correctAnswer: 'B',
+        explanation: "Mars is known as the Red Planet due to the reddish appearance of its surface caused by iron oxide."
+    },
+
+    // --- POLITY (57-58) ---
+    {
+        id: 57,
+        subject: 'Polity',
+        topic: 'Fundamental Rights',
+        text: "Which Article of the Indian Constitution deals with the Abolition of Untouchability?",
+        options: [
+            { id: 'A', text: "Article 16" },
+            { id: 'B', text: "Article 17" },
+            { id: 'C', text: "Article 18" },
+            { id: 'D', text: "Article 23" }
+        ],
+        correctAnswer: 'B',
+        explanation: "Article 17 of the Indian Constitution abolishes 'untouchability' and forbids its practice in any form."
+    },
+    {
+        id: 58,
+        subject: 'Polity',
+        topic: 'Parliament',
+        text: "The joint sitting of the Parliament is presided over by the:",
+        options: [
+            { id: 'A', text: "President" },
+            { id: 'B', text: "Prime Minister" },
+            { id: 'C', text: "Chairman of Rajya Sabha" },
+            { id: 'D', text: "Speaker of Lok Sabha" }
+        ],
+        correctAnswer: 'D',
+        explanation: "The joint sitting of the Parliament is called by the President but presided over by the Speaker of the Lok Sabha."
+    },
+
+    // --- ECONOMY (59-60) ---
+    {
+        id: 59,
+        subject: 'Economy',
+        topic: 'Banking',
+        text: "Which body regulates the money supply in India?",
+        options: [
+            { id: 'A', text: "Finance Ministry" },
+            { id: 'B', text: "SBI" },
+            { id: 'C', text: "Reserve Bank of India" },
+            { id: 'D', text: "NITI Aayog" }
+        ],
+        correctAnswer: 'C',
+        explanation: "The Reserve Bank of India (RBI) is the central bank of India and regulates the money supply and banking system."
+    },
+    {
+        id: 60,
+        subject: 'Economy',
+        topic: 'Inflation',
+        text: "Which of the following is used to measure inflation in India?",
+        options: [
+            { id: 'A', text: "Consumer Price Index (CPI)" },
+            { id: 'B', text: "Wholesale Price Index (WPI)" },
+            { id: 'C', text: "GDP Deflator" },
+            { id: 'D', text: "All of the above" }
+        ],
+        correctAnswer: 'D',
+        explanation: "Inflation is essentially measured by WPI and CPI in India. GDP deflator is also a measure. However, CPI is the primary metric for inflation targeting by RBI."
+    },
+
+    // --- ENVIRONMENT (61-62) ---
+    {
+        id: 61,
+        subject: 'Environment',
+        topic: 'Protected Areas',
+        text: "In which state is the Kuno National Park located?",
+        options: [
+            { id: 'A', text: "Rajasthan" },
+            { id: 'B', text: "Madhya Pradesh" },
+            { id: 'C', text: "Gujarat" },
+            { id: 'D', text: "Maharashtra" }
+        ],
+        correctAnswer: 'B',
+        explanation: "Kuno National Park is located in Madhya Pradesh, famous for the reintroduction of Cheetahs in India."
+    },
+    {
+        id: 62,
+        subject: 'Environment',
+        topic: 'Climate Change',
+        text: "Which gas is primarily responsible for the Greenhouse Effect?",
+        options: [
+            { id: 'A', text: "Oxygen" },
+            { id: 'B', text: "Nitrogen" },
+            { id: 'C', text: "Carbon Dioxide" },
+            { id: 'D', text: "Argon" }
+        ],
+        correctAnswer: 'C',
+        explanation: "Carbon Dioxide (CO2) is the primary greenhouse gas emitted through human activities and is a major driver of global warming."
     }
 ];
