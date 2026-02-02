@@ -19,6 +19,7 @@ import SmartStudyPlan from './SmartStudyPlan';
 import MockTestInterface from './MockTestInterface';
 import TestResultPage from './TestResultPage';
 import PerformanceAnalytics from './PerformanceAnalytics';
+import ViewSolutionPage from './ViewSolutionPage';
 import ScrollToTop from './ScrollToTop';
 import GlobalSidebar from './components/GlobalSidebar';
 import './App.css';
@@ -105,6 +106,7 @@ function App() {
           <Route path="/smart-study-plan" element={<SmartStudyPlan />} />
           <Route path="/mock-test" element={<MockTestInterface />} />
           <Route path="/test-result" element={<TestResultPage />} />
+          <Route path="/view-solution" element={<ViewSolutionPage />} />
           <Route path="/analytics" element={<PerformanceAnalytics />} />
         </Routes>
       </div>
