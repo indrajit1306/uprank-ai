@@ -10,6 +10,10 @@ export const EXAM_CONFIG = {
     'GOVT': {
         name: 'Government Exam',
         subjects: ['Maths', 'Logical Reasoning', 'English', 'Aptitude']
+    },
+    'UPSC': {
+        name: 'UPSC Civil Services',
+        subjects: ['History', 'Geography', 'Polity', 'Economy', 'Environment', 'Physics', 'Chemistry', 'Biology']
     }
 };
 
