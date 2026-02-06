@@ -1,6 +1,7 @@
 .explore-container {
     min-height: 100vh;
     background: var(--background);
+    background-attachment: fixed;
     color: var(--text-main);
     font-family: 'Inter', sans-serif;
 }
