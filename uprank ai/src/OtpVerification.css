@@ -1,6 +1,7 @@
 .otp-container {
     min-height: 100vh;
     background: var(--background);
+    background-attachment: fixed;
     font-family: 'Inter', sans-serif;
     color: var(--text-main);
     display: flex;
