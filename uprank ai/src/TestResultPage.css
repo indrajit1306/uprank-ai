@@ -3,7 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 :root {
-    --res-bg: #0f0c29;
+    --res-bg: linear-gradient(135deg, #0a0a1f 0%, #1a0a2e 50%, #0f0520 100%);
     --res-card-bg: #1e1b3a;
     /* Dark violet/navy */
     --res-accent-purple: #8b5cf6;
@@ -15,7 +15,8 @@
 }
 
 .result-page-container {
-    background-color: var(--res-bg);
+    background: var(--res-bg);
+    background-attachment: fixed;
     min-height: 100vh;
     color: var(--res-text-main);
     font-family: 'Inter', sans-serif;

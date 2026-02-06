@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
-    --mt-bg-dark: #0f0c29;
+    --mt-bg-dark: linear-gradient(135deg, #0a0a1f 0%, #1a0a2e 50%, #0f0520 100%);
     --mt-bg-panel: #16133a;
     /* Slightly lighter deep purple/blue */
     --mt-primary: #6366f1;
@@ -23,7 +23,8 @@
     display: flex;
     flex-direction: column;
     height: 100vh;
-    background-color: var(--mt-bg-dark);
+    background: var(--mt-bg-dark);
+    background-attachment: fixed;
     color: var(--mt-text);
     font-family: 'Inter', sans-serif;
     overflow: hidden;

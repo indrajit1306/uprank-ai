@@ -1,7 +1,8 @@
 /* Global/Shared */
 .app {
   min-height: 100vh;
-  background-color: var(--background);
+  background: var(--background);
+  background-attachment: fixed;
   color: var(--text-main);
   overflow-x: hidden;
 }

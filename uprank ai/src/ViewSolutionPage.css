@@ -1,6 +1,6 @@
 /* Shared Variables (duplicated from TestResultPage for standalone reliability) */
 :root {
-    --res-bg: #0f0c29;
+    --res-bg: linear-gradient(135deg, #0a0a1f 0%, #1a0a2e 50%, #0f0520 100%);
     --res-card-bg: #1e1b3a;
     --res-accent-purple: #8b5cf6;
     --res-accent-green: #10b981;
@@ -13,7 +13,8 @@
 .view-solution-container {
     padding-top: 0;
     /* Navbar is inside */
-    background-color: var(--res-bg);
+    background: var(--res-bg);
+    background-attachment: fixed;
     /* Match TestResultPage dark theme */
     min-height: 100vh;
     color: var(--res-text-main);
