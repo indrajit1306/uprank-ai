@@ -10,6 +10,7 @@ import './ExamSelection.css';
 const ExamSelection = () => {
     const [activeCategory, setActiveCategory] = useState('All Exams');
     const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'dark');
+    const [searchQuery, setSearchQuery] = useState('');
     const navigate = useNavigate();
 
     React.useEffect(() => {
@@ -19,6 +20,14 @@ const ExamSelection = () => {
 
     const toggleTheme = () => {
         setTheme(prevTheme => prevTheme === 'dark' ? 'light' : 'dark');
+    };
+
+    const handleSearch = () => {
+        // Scroll to explore section when search is clicked
+        const exploreSection = document.querySelector('.explore-section');
+        if (exploreSection) {
+            exploreSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
     };
 
     const categories = [
@@ -68,6 +77,15 @@ const ExamSelection = () => {
         { icon: <Briefcase color="#f87171" />, title: "NATA Architecture", desc: "Drawing and aesthetic sensitivity tests for architecture.", tag: "NATA" },
     ];
 
+    // Filter exams based on search query
+    const filteredExams = searchQuery.trim()
+        ? exploreExams.filter(exam =>
+            exam.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            exam.tag.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            exam.desc.toLowerCase().includes(searchQuery.toLowerCase())
+        )
+        : exploreExams;
+
     return (
         <div className="exam-selection-container">
             {/* Navbar */}
@@ -101,8 +119,14 @@ const ExamSelection = () => {
 
                     <div className="search-bar-wrapper">
                         <Search className="search-icon" size={20} />
-                        <input type="text" placeholder="Search for exams (e.g., GMAT, UPSC, NEET)..." />
-                        <button className="search-btn">Search</button>
+                        <input
+                            type="text"
+                            placeholder="Search for exams (e.g., GMAT, UPSC, NEET)..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
+                        />
+                        <button className="search-btn" onClick={handleSearch}>Search</button>
                     </div>
                 </div>
             </header>
@@ -164,24 +188,45 @@ const ExamSelection = () => {
                             Most Relevant <ChevronDown size={16} />
                         </div>
                     </div>
+                    {searchQuery && (
+                        <p style={{ color: 'var(--text-muted)', marginBottom: '1rem', fontSize: '0.9rem' }}>
+                            {filteredExams.length} result{filteredExams.length !== 1 ? 's' : ''} found for "{searchQuery}"
+                        </p>
+                    )}
                     <div className="explore-grid">
-                        {exploreExams.map((exam, idx) => (
-                            <div className="explore-card" key={idx}>
-                                <div className="explore-card-top">
-                                    <div className="exam-icon-box">{exam.icon}</div>
-                                    <span className="exam-code">{exam.tag}</span>
-                                </div>
-                                <h4>{exam.title}</h4>
-                                <p>{exam.desc}</p>
-                                <button className="view-details-btn">View Details</button>
+                        {filteredExams.length > 0 ? (
+                            <>
+                                {filteredExams.map((exam, idx) => (
+                                    <div className="explore-card" key={idx}>
+                                        <div className="explore-card-top">
+                                            <div className="exam-icon-box">{exam.icon}</div>
+                                            <span className="exam-code">{exam.tag}</span>
+                                        </div>
+                                        <h4>{exam.title}</h4>
+                                        <p>{exam.desc}</p>
+                                        <button className="view-details-btn">View Details</button>
+                                    </div>
+                                ))}
+                                {!searchQuery && (
+                                    <div className="explore-card view-all-card" onClick={() => navigate('/explore-exams')}>
+                                        <div className="plus-circle">
+                                            <Plus size={24} />
+                                        </div>
+                                        <span>View All 40+ Exams</span>
+                                    </div>
+                                )}
+                            </>
+                        ) : (
+                            <div style={{
+                                gridColumn: '1 / -1',
+                                textAlign: 'center',
+                                padding: '3rem',
+                                color: 'var(--text-muted)'
+                            }}>
+                                <p style={{ fontSize: '1.1rem', marginBottom: '0.5rem' }}>No exams found</p>
+                                <p style={{ fontSize: '0.9rem' }}>Try searching with different keywords</p>
                             </div>
-                        ))}
-                        <div className="explore-card view-all-card" onClick={() => navigate('/explore-exams')}>
-                            <div className="plus-circle">
-                                <Plus size={24} />
-                            </div>
-                            <span>View All 40+ Exams</span>
-                        </div>
+                        )}
                     </div>
                 </div>
             </main>
